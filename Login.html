@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Boreas</title>
+	<link rel="stylesheet" type="text/css" href="fileCSS/Login.css">
+	<link rel="stylesheet" type="text/css" href="fileCSS/Navbar.css">
+</head>
+
+<body>
+
+	<nav class="nav">
+		<a href="#" class="nav-item is-active" active-color="red">Home</a>
+		<a href="#" class="nav-item" active-color="orange">Chi Siamo</a>
+		<a href="#" class="nav-item" active-color="yellow">Contatti</a>
+		<a href="#" class="nav-item" active-color="lime">Login</a>
+		<span class="nav-indicator"></span>
+	</nav>
+
+	<div class="main">
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+		<div class="signup">
+			<form>
+				<label for="chk" aria-hidden="true">Sign up</label>
+				<input type="text" name="txt" placeholder="User name" required="">
+				<input type="email" name="email" placeholder="Email" required="">
+				<input type="text" name="city" placeholder="Your City" required="">
+				<input type="password" name="pswd" placeholder="Password" required="">
+				<button>Sign up</button>
+			</form>
+		</div>
+
+		<div class="signin">
+			<form>
+				<label for="chk" aria-hidden="true">Sign In</label>
+				<input type="email" name="email" placeholder="Email" required="">
+				<input type="password" name="pswd" placeholder="Password" required="">
+				<button>Sign In</button>
+			</form>
+		</div>
+	</div>
+
+	<script src="fileJS/Navbar.js"></script>
+</body>
+
+</html>

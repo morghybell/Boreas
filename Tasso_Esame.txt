@@ -1,0 +1,17 @@
+Devi fare:
+- analisi dei requisiti
+- su visual studio fai:
+	- Home
+	- Pagina di login
+	- Pagina per l'utente 
+	- Pagina per L'UOMO DEL METEO
+- fai repo su GitHub e gira il link a Ema
+
+
+Backend: Zephyros
+Frontend: Boreas
+
+
+Home: https://codepen.io/renduh/pen/pKQYZw
+Login: https://codepen.io/mamislimen/pen/jOwwLvy
+Meteo: https://codepen.io/jasesmith/pen/LbJrXx
