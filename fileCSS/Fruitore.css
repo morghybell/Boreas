@@ -1,9 +1,106 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   text-align: center;
   overflow-x: hidden;
+  overflow-y: auto;
+  background: linear-gradient(to right,
+      #87CEEB 0%,
+      #ADD8E6 25%,
+      #4169E1 75%,
+      #191970 90%,
+      #000033 100%);
 }
+
+/* CLOUDS */
+.cloud {
+  position: absolute;
+  border-radius: 60px;
+  /* Make them more oval */
+  background-color: #fff;
+  box-shadow:
+    0 0 20px -5px rgb(255, 255, 255);
+  /* Soft outer shadow for blending */
+  opacity: 0.9;
+}
+
+/* Fluffy parts of the cloud */
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  background-color: inherit;
+  box-shadow: inherit;
+  bottom: 25%;
+}
+
+/* === Left cloud (smaller, moves back and forth near center-left) === */
+.cloud.left {
+  top: 15%;
+  left: 30%;
+  width: 60px;
+  height: 20px;
+  animation: floatBackForth 20s ease-in-out infinite;
+}
+
+.cloud.left::before {
+  left: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.cloud.left::after {
+  left: 30px;
+  width: 25px;
+  height: 25px;
+}
+
+/* === Right cloud (smaller, moves back and forth near center-right) === */
+.cloud.right {
+  top: 25%;
+  left: 60%;
+  width: 50px;
+  height: 18px;
+  animation: floatBackForth 25s ease-in-out infinite reverse;
+}
+
+.cloud.right::before {
+  left: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.cloud.right::after {
+  left: 25px;
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes floatBackForth {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(40px);
+    /* Drift right */
+  }
+
+  100% {
+    transform: translateX(0);
+    /* Return to original position */
+  }
+}
+
+
 
 .container {
   display: flex;
@@ -186,16 +283,22 @@ body {
     top: 7px;
   }
 }
+
 .eyes {
   position: absolute;
-  width: 82.5px;  /* 110 * 0.75 */
-  height: 15px;   /* 20 * 0.75 */
-  top: 67.5px;    /* 90 * 0.75 */
-  left: 33.75px;  /* 45 * 0.75 */
+  width: 82.5px;
+  /* 110 * 0.75 */
+  height: 15px;
+  /* 20 * 0.75 */
+  top: 67.5px;
+  /* 90 * 0.75 */
+  left: 33.75px;
+  /* 45 * 0.75 */
 }
 
 .eyes-l {
-  width: 11.25px;  /* 15 * 0.75 */
+  width: 11.25px;
+  /* 15 * 0.75 */
   height: 11.25px;
   border-radius: 50%;
   position: absolute;
@@ -234,8 +337,136 @@ body {
   margin-bottom: 0px;
   position: relative;
   z-index: 2;
-  background: linear-gradient(to right, #f4c042, #95c7fa);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f0f1e9;
+  text-shadow:
+    1px 1px 2px rgba(78, 79, 70, 0.8),
+    -1px -1px 2px rgba(78, 79, 70, 0.8),
+    1px -1px 2px rgba(78, 79, 70, 0.8),
+    -1px 1px 2px rgba(78, 79, 70, 0.8);
+}
+
+/* CITY */
+#city-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the form horizontally */
+  justify-content: center; /* Center the form vertically if you need it */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column; /* Ensure elements are stacked vertically */
+  align-items: center; /* Center all children horizontally */
+  gap: 10px; /* Space between elements */
+  justify-content: center; /* Optional: to align elements vertically */
+}
+
+/* Ensure the input and suggestions are stacked together */
+.input-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+#city-input {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  text-align: center;
+
+}
+
+label[for="city-input"] {
+  white-space: nowrap;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  margin-top: 5px;
+}
+
+/* Suggestion dropdown under input */
+.suggestions-list {
+  width: 100%;
+  font-size: 16px;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 12px; /* Rounded corners */
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.929);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* Style for each suggestion item */
+.suggestions-list li {
+  padding: 10px 12px;
+  cursor: pointer;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+/* Remove bottom border for the last item */
+.suggestions-list li:last-child {
+  border-bottom: none;
+}
+
+/* Highlight on hover */
+.suggestions-list li:hover {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.days-select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+
+#days-select {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+}
+
+/* Button style */
+button {
+  font-size: 16px;
+  background-color: #ffffff5d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0000009d;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 128, 0, 0.3);
 }
