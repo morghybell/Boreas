@@ -8,7 +8,6 @@
 /* se qui gli metti border-radius: 100% allora diventa tondo*/
 [icon] {
     flex: none;
-    display: none;
     position: relative;
     font-size: calc(10em + 1vmin);
     box-shadow: 0 0 0 .05em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
@@ -44,6 +43,7 @@
     background: #ffeb3b;
     box-shadow: 0 0 0 .02em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
     transform-origin: .1em .1em;
+    top: 20px;
 }
 
 .sun-ico::after {
@@ -100,10 +100,7 @@
     color: #e6e8db;
 }
 
-.temperature,
-.humidity,
-.pressure,
-.wind {
+.parameter-color {
     font-size: 2vw;
     color: #e6e8db;
 }

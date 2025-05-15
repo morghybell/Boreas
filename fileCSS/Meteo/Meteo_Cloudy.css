@@ -5,10 +5,8 @@
     --blend-dir: top right;
 }
 
-/* se qui gli metti border-radius: 100% allora diventa tondo*/
 [icon] {
     flex: none;
-    display: none;
     position: relative;
     font-size: calc(10em + 1vmin);
     box-shadow: 0 0 0 .05em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
@@ -111,6 +109,7 @@
 
 /* Container to align all divs horizontally */
 .weather-container {
+    position: relative;
     margin: 30px auto 0 auto;
     width: 90vw;
     min-height: 50vh;
@@ -136,10 +135,7 @@
     color: #e6e8db;
 }
 
-.temperature,
-.humidity,
-.pressure,
-.wind {
+.parameter-color {
     font-size: 2vw;
     color: #e6e8db;
 }

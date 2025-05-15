@@ -8,7 +8,6 @@
 /* se qui gli metti border-radius: 100% allora diventa tondo*/
 [icon] {
     flex: none;
-    display: none;
     position: relative;
     font-size: calc(10em + 1vmin);
     box-shadow: 0 0 0 .05em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
@@ -68,8 +67,8 @@
 
 .moon-ico {
     position: absolute;
-    top: 65%;
-    left: 80%;
+    top: 35%;
+    right: 1%;
     transform: translate(-50%, -50%);
     width: 15%;
     aspect-ratio: 1;
@@ -139,6 +138,7 @@
 
 /* Container to align all divs horizontally */
 .weather-container {
+    position: relative;
     margin: 30px auto 0 auto;
     width: 90vw;
     min-height: 50vh;
@@ -164,10 +164,7 @@
     color: #e6e8db;
 }
 
-.temperature,
-.humidity,
-.pressure,
-.wind {
+.parameter-color {
     font-size: 2vw;
     color: #e6e8db;
 }
