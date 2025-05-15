@@ -1,20 +1,7 @@
-
-// Sample weather data
-const sampleWeatherData = [
-    { city: "Roma", temperature: "22°C", humidity: "60%", pressure: "1015 hPa", wind: "No" },
-    { city: "Milano", temperature: "20°C", humidity: "65%", pressure: "1012 hPa", wind: "Brezza" },
-    { city: "Napoli", temperature: "25°C", humidity: "55%", pressure: "1010 hPa", wind: "Moderato" },
-    { city: "Torino", temperature: "18°C", humidity: "70%", pressure: "1008 hPa", wind: "Forte" },
-    { city: "Firenze", temperature: "22°C", humidity: "60%", pressure: "1014 hPa", wind: "Calma" },
-    { city: "Bologna", temperature: "21°C", humidity: "63%", pressure: "1013 hPa", wind: "Leggera" },
-    { city: "Venezia", temperature: "23°C", humidity: "58%", pressure: "1016 hPa", wind: "Moderata" }
-];
-
-
-function getWeatherContainer(type, weather) {
-    console.log(`Generating weather container for type: ${type} with data:`, weather);
+function getWeatherContainer(weather) {
+    console.log(`Generating weather container for type: ${weather.type} with data:`, weather);
     
-    switch (type) {
+    switch (weather.type) {
         case 1:
             return `
             <div class="weather-container" icon="sunny">
@@ -24,7 +11,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -55,7 +42,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -69,7 +56,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -89,7 +76,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -103,7 +90,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -112,7 +99,7 @@ function getWeatherContainer(type, weather) {
     }
 }
 
-function updateWeatherContainers() {
+function updateWeatherContainers(weather_arr) {
     const container = document.getElementById("weather-row");
     const daysSelect = document.getElementById("days-select");
     
@@ -122,15 +109,13 @@ function updateWeatherContainers() {
     container.innerHTML = "";
 
     for (let i = 0; i < count; i++) {
-        const weather = sampleWeatherData[i % sampleWeatherData.length];
-        const type = (i % 5) + 1;
+        const weather = weather_arr[i];
+		const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
 
-        const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
-
-        const weatherHTML = getWeatherContainer(type, weather);
+        const weatherHTML = getWeatherContainer(weather);
         const dayWrapper = `
             <div class="weather-day">
-                <h4>${label}</h4>
+                <h4 id="w-day">${label}</h4>
                 ${weatherHTML}
             </div>
         `;
