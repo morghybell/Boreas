@@ -1,0 +1,133 @@
+:root {
+    --ring: currentColor;
+    --blend-from: 0%;
+    --blend-to: 100%;
+    --blend-dir: top right;
+}
+
+/* se qui gli metti border-radius: 100% allora diventa tondo*/
+[icon] {
+    flex: none;
+    display: none;
+    position: relative;
+    font-size: calc(10em + 1vmin);
+    box-shadow: 0 0 0 .05em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
+    background: linear-gradient(to var(--blend-dir), var(--blend1) var(--blend-from), var(--blend2) var(--blend-to));
+}
+
+[icon]::after {
+    content: attr(data-label);
+    position: absolute;
+    top: calc(100% + 1vmin);
+    left: 50%;
+    transform: translateX(-50%);
+    font: inherit;
+    font-size: .15em;
+}
+
+[icon='sunny'] {
+    --shadow: #fd6f21;
+    --blend1: #fc5830;
+    --blend2: #f98c24;
+    --blend-to: 65%;
+}
+
+/* SUNNY */
+/* --------------------- */
+.sun-ico {
+    position: absolute;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    background: #ffeb3b;
+    box-shadow: 0 0 0 .02em var(--ring) inset, 0 0 .3em -.03em var(--shadow);
+    transform-origin: .1em .1em;
+}
+
+.sun-ico::after {
+    content: '';
+    position: absolute;
+    top: .1em;
+    left: 0;
+    will-change: transform;
+    transform: translate(-50%, -50%);
+    width: .1em;
+    height: .1em;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, .1);
+    box-shadow: 0 0 .1em 0 rgba(255, 255, 255, .3) inset, -.1em -.1em 0 .2em rgba(255, 255, 255, .1);
+    animation: flare 12000ms infinite alternate linear;
+}
+
+[icon="sunny"] {
+    display: block;
+}
+
+@keyframes flare {
+    to {
+        transform: translate(-.3em, .3em);
+        opacity: .4;
+        font-size: .2em;
+    }
+}
+
+/* Container to align all divs horizontally */
+.weather-container {
+    margin: 30px auto 0 auto;
+    width: 90vw;
+    min-height: 50vh;
+    box-sizing: border-box;
+    color: #e6e8db;
+    text-align: center;
+}
+
+.icon-class {
+    color: #e6e8db;
+}
+
+.city-name {
+    font-weight: bold;
+    font-size: 15vw;
+    text-align: center;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    margin-top: 0; 
+    width: auto; 
+    color: #e6e8db;
+}
+
+.temperature,
+.humidity,
+.pressure,
+.wind {
+    font-size: 2vw;
+    color: #e6e8db;
+}
+
+.temperature {
+    position: absolute;
+    top: 2%;  
+    left: 4%;
+}
+
+.humidity {
+    position: absolute;
+    top: 13%;  
+    left: 4%; 
+}
+
+.pressure {
+    position: absolute;
+    bottom: 13%;
+    left: 4%;
+}
+
+.wind {
+    position: absolute;
+    bottom: 2%;
+    left: 4%;
+}

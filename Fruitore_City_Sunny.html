@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boreas</title>
 
-    <link rel="stylesheet" href="fileCSS/Meteo.css" />
-    <link rel="stylesheet" href="fileCSS/Fruitore_Search.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Sunny.css" />
     <link rel="stylesheet" href="fileCSS/Navbar.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore.css" />
 </head>
@@ -36,7 +35,8 @@
             </div>
         </div>
         <div class="box">
-            <p>ciao utente</p>
+            <p>Ben tornato *nome utente*, ecco le previsioni per *nome città*, la tua città preferita! Vediamo come sarà
+                il tempo oggi.</p>
         </div>
         <div class="box">
             <div id="moon">
@@ -54,25 +54,20 @@
         </div>
     </div>
 
-    <div class="cloud left"></div>
-    <div class="cloud right"></div>
+    <div class="cloud-top left"></div>
+    <div class="cloud-top right"></div>
 
-    <div id="city-menu">
-        <div class="form-row">
-            <label for="city-input">Inserisci il nome della città:</label>
-            <div class="input-wrapper">
-                <input type="text" id="city-input" placeholder="Scrivi il nome di una città" autocomplete="on">
-                <ul id="city-suggestions" class="suggestions-list"></ul>
-            </div>
-            <label for="days-select">Previsioni per:</label>
-            <div class="days-select-wrapper">
-                <select id="days-select"></select>
-            </div>
-            <button id="show-weather">Show weather</button>
+    <div class="weather-container" icon="sunny">
+        <span class="sun-ico"></span>
+        <div class="weather-info">
+            <p class="city-name">Roma</p>
+            <p class="temperature">Temperatura: 22°C</p>
+            <p class="humidity">Umidità: 60%</p>
+            <p class="pressure">Pressione: 1015 hPa</p>
+            <p class="wind">Vento: No</p>
         </div>
     </div>
 
-    <script src="fileJS/MenuCitta.js"></script>
     <script src="fileJS/Navbar.js" defer></script>
 </body>
 

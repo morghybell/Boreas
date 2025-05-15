@@ -1,22 +1,44 @@
-const indicator = document.querySelector('.nav-indicator');
-const items = document.querySelectorAll('.nav-item');
+fetch('navbar.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('navbar-placeholder').innerHTML = data;
 
-function handleIndicator(el) {
-  items.forEach(item => {
-    item.classList.remove('is-active');
-    item.removeAttribute('style');
+    const navItems = document.querySelectorAll(".nav-item");
+    const indicator = document.querySelector(".nav-indicator");
+
+    const currentUrl = window.location.href;
+    const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+
+    let activeItem = null;
+
+    navItems.forEach(item => {
+      const href = item.getAttribute("href");
+      if (currentPage === href || currentUrl.includes(href)) {
+        item.classList.add("is-active");
+        activeItem = item;
+      }
+    });
+
+    if (activeItem) {
+      const activeColor = activeItem.getAttribute("active-color") || "red";
+      indicator.style.width = activeItem.offsetWidth + "px";
+      indicator.style.left = activeItem.offsetLeft + "px";
+      indicator.style.backgroundColor = activeColor;
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener("mouseenter", () => {
+        indicator.style.width = item.offsetWidth + "px";
+        indicator.style.left = item.offsetLeft + "px";
+        indicator.style.backgroundColor = item.getAttribute("active-color") || "red";
+      });
+
+      item.addEventListener("mouseleave", () => {
+        if (activeItem) {
+          indicator.style.width = activeItem.offsetWidth + "px";
+          indicator.style.left = activeItem.offsetLeft + "px";
+          indicator.style.backgroundColor = activeItem.getAttribute("active-color") || "red";
+        }
+      });
+    });
   });
-  
-  indicator.style.width = `${el.offsetWidth}px`;
-  indicator.style.left = `${el.offsetLeft}px`;
-  indicator.style.backgroundColor = el.getAttribute('active-color');
-
-  el.classList.add('is-active');
-  el.style.color = el.getAttribute('active-color');
-}
-
-
-items.forEach((item, index) => {
-  item.addEventListener('click', (e) => { handleIndicator(e.target)});
-  item.classList.contains('is-active') && handleIndicator(item);
-});
