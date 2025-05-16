@@ -161,6 +161,11 @@ footer::before {
   border-radius: calc(0.5 * var(--m));
 }
 
+
+.col3{
+  font-size: 2rem;
+}
+
 img {
   height: calc(0.3 * var(--m));
   object-fit: cover;

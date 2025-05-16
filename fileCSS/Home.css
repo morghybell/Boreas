@@ -270,7 +270,7 @@ body {
 
 .simtime {
 	color: #d3d3d3;
-	font-family: sans-serif;
+	font-family: "IBM Plex Sans";
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -315,7 +315,7 @@ body {
 #toggle-label-right {
 	display: inline;
 	color: #d3d3d3;
-	font-family: sans-serif;
+	font-family: "IBM Plex Sans";
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -329,7 +329,7 @@ body {
 
 /* Title */
 #title {
-	font-family: "Brush Script MT";
+	font-family: "IBM Plex Sans";
 	font-size: 5rem;
 	/* Default size, 5 times the root font size */
 	transition: color 0.5s ease;

@@ -1,13 +1,27 @@
-fetch('navbar.html')
+// Determine the current page
+const currentUrl = window.location.href;
+const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+
+// Set the navbar file based on the page
+let navbarFile = 'navbar.html';  // Default navbar file
+
+// Set the navbar based on the page being loaded
+if (currentPage === "Home.html") {
+  navbarFile = 'Navbar_Home.html';
+} else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html") {
+  navbarFile = 'Navbar_Fruitore.html';
+} else if (currentPage === "Rrogatore.html") {
+  navbarFile = 'Navbar_Erogatore.html';
+}
+
+// Fetch the corresponding navbar file
+fetch(navbarFile)
   .then(response => response.text())
   .then(data => {
     document.getElementById('navbar-placeholder').innerHTML = data;
 
     const navItems = document.querySelectorAll(".nav-item");
     const indicator = document.querySelector(".nav-indicator");
-
-    const currentUrl = window.location.href;
-    const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
 
     let activeItem = null;
 
@@ -42,6 +56,7 @@ fetch('navbar.html')
       });
     });
   });
+
 
 fetch("Footer.html")
   .then(response => response.text())

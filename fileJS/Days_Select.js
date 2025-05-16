@@ -1,5 +1,5 @@
 function populateDaysSelect() {
-    const daysSelect = document.getElementById('days-select'); // ✅ Add this line
+    const daysSelect = document.getElementById('days-select'); 
     const weekdays = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
 
     for (let i = 0; i < 7; i++) {
