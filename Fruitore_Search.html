@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boreas</title>
 
-    <link rel="stylesheet" href="fileCSS/Meteo.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Sunny.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Snowy.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Cloudy.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Moon.css" />
+    <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Stormy.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore_Search.css" />
     <link rel="stylesheet" href="fileCSS/Navbar.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore.css" />
@@ -59,21 +63,23 @@
 
     <div id="menu-select">
         <div class="form-row">
-            <label for="city-input" class="text-style" >Inserisci il nome della città:</label>
+            <label for="city-input" class="text-style">Inserisci il nome della città:</label>
             <div class="input-wrapper">
                 <input type="text" id="city-input" placeholder="Scrivi il nome di una città" autocomplete="on">
                 <ul id="city-suggestions" class="suggestions-list"></ul>
             </div>
-            <label for="days-select" class="text-style" >Previsioni per:</label>
-            <div class="days-select-wrapper">
+            <label for="days-select" class="text-style">Previsioni per:</label>
+            <div class="controls">
                 <select id="days-select"></select>
+                <button id="show-weather" onclick="updateWeatherContainers()">Show Weather</button>
             </div>
-            <button id="show-weather">Show weather</button>
-        </div>
-    </div>
 
-    <script src="fileJS/MenuCitta.js"></script>
-    <script src="fileJS/Navbar.js" defer></script>
+            <!-- Container to hold the weather containers -->
+            <div id="weather-row"></div>
+
+            <script src="fileJS/MenuCitta.js"></script>
+            <script src="fileJS/Navbar.js" defer></script>
+            <script src="fileJS/Meteo.js" defer></script>
 </body>
 
 </html>
