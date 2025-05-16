@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Cloudy.css" />
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Moon.css" />
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Stormy.css" />
+    <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore_Search.css" />
-    <link rel="stylesheet" href="fileCSS/Navbar.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore.css" />
 </head>
 
@@ -58,8 +58,8 @@
         </div>
     </div>
 
-    <div class="cloud left"></div>
-    <div class="cloud right"></div>
+    <div class="cloud-top left"></div>
+    <div class="cloud-top right"></div>
 
     <div id="menu-select">
         <div class="form-row">
@@ -73,13 +73,18 @@
                 <select id="days-select"></select>
                 <button id="show-weather" onclick="updateWeatherContainers()">Show Weather</button>
             </div>
+        </div>
+    </div>
 
-            <!-- Container to hold the weather containers -->
-            <div id="weather-row"></div>
 
-            <script src="fileJS/MenuCitta.js"></script>
-            <script src="fileJS/Navbar.js" defer></script>
-            <script src="fileJS/Meteo.js" defer></script>
+    <!-- Container to hold the weather containers -->
+    <div id="weather-row"></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="fileJS/MenuCitta.js"></script>
+    <script src="fileJS/Navbar_Footer.js"></script>
+    <script src="fileJS/Meteo.js" defer></script>
 </body>
 
 </html>

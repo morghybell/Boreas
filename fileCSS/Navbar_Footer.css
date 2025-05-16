@@ -1,3 +1,7 @@
+#navbar-placeholder {
+  width: 100%;
+}
+
 .nav {
   position: relative;
   display: flex;
@@ -8,6 +12,7 @@
   border-radius: 40px;
   box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
   z-index: 999;
+  width: 100%;
 }
 
 .nav-indicator {
@@ -64,6 +69,10 @@
 /******************************************** FOOTER ********************************************/
 :root {
   --m: 4rem;
+}
+
+#footer-placeholder {
+  width: 100%;
 }
 
 * {

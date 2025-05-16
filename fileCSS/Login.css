@@ -1,31 +1,41 @@
-body{
+body {
+	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	margin: 0;
+	padding: 0;
 	min-height: 100vh;
-	font-family: 'Jost', sans-serif;
+	display: flex;
+	flex-direction: column;
 	background: linear-gradient(to bottom, #7a6021, #f4c042, #95c7fa, #0f2964);
+	align-items: center;
 }
-.main{
+
+.main {
+	margin-top: 5%;
 	width: 350px;
 	height: 500px;
+	justify-content: center;
+	align-items: center;
 	background: #f4c042;
 	overflow: hidden;
 	border-radius: 200px;
 	box-shadow: 5px 20px 50px #000;
 }
-#chk{
+
+#chk {
 	display: none;
 }
+
 /* SIGN UP */
-.signup{
+.signup {
 	position: relative;
-	width:100%;
+	width: 100%;
 	height: 100%;
 }
-label{
+
+label {
 	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
@@ -35,7 +45,8 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+
+input {
 	width: 60%;
 	height: 10px;
 	background: #ffffff7b;
@@ -47,7 +58,8 @@ input{
 	outline: none;
 	border-radius: 20px;
 }
-button{
+
+button {
 	width: 60%;
 	height: 40px;
 	margin: 10px auto;
@@ -64,28 +76,34 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
 }
-button:hover{
+
+button:hover {
 	background: #ffffff12;
 }
+
 /* SIGN IN */
-.signin{
+.signin {
 	height: 430px;
 	background: #95c7fa;
-	border-radius: 60% / 40%; /* transition curve radius */
+	border-radius: 60% / 40%;
+	/* transition curve radius */
 	transform: translateY(-180px);
 	transition: transform 0.8s ease-in-out;
 }
-.signin label{
+
+.signin label {
 	color: #0f2964;
 	transform: scale(.6);
 }
 
-#chk:checked ~ .signin{
+#chk:checked~.signin {
 	transform: translateY(-500px);
 }
-#chk:checked ~ .signin label{
-	transform: scale(1);	
+
+#chk:checked~.signin label {
+	transform: scale(1);
 }
-#chk:checked ~ .signup label{
+
+#chk:checked~.signup label {
 	transform: scale(.6);
 }

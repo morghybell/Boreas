@@ -55,9 +55,3 @@
   background-color: #f1f1f1;
   border-radius: 12px;
 }
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}

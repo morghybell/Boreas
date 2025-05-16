@@ -1,13 +1,12 @@
-
 // Sample weather data
 const sampleWeatherData = [
-    { city: "Roma", temperature: "22°C", humidity: "60%", pressure: "1015 hPa", wind: "No" },
-    { city: "Milano", temperature: "20°C", humidity: "65%", pressure: "1012 hPa", wind: "Brezza" },
-    { city: "Napoli", temperature: "25°C", humidity: "55%", pressure: "1010 hPa", wind: "Moderato" },
-    { city: "Torino", temperature: "18°C", humidity: "70%", pressure: "1008 hPa", wind: "Forte" },
-    { city: "Firenze", temperature: "22°C", humidity: "60%", pressure: "1014 hPa", wind: "Calma" },
-    { city: "Bologna", temperature: "21°C", humidity: "63%", pressure: "1013 hPa", wind: "Leggera" },
-    { city: "Venezia", temperature: "23°C", humidity: "58%", pressure: "1016 hPa", wind: "Moderata" }
+    { city: "Roma", temperature: "22°C", humidity: "60%", pressure: "1015 hPa", wind_velocity: 10, wind_direction: "NE" },
+    { city: "Milano", temperature: "20°C", humidity: "65%", pressure: "1012 hPa", wind_velocity: 8, wind_direction: "N" },
+    { city: "Napoli", temperature: "25°C", humidity: "55%", pressure: "1010 hPa", wind_velocity: 15, wind_direction: "SE" },
+    { city: "Torino", temperature: "18°C", humidity: "70%", pressure: "1008 hPa", wind_velocity: 25, wind_direction: "W" },
+    { city: "Firenze", temperature: "22°C", humidity: "60%", pressure: "1014 hPa", wind_velocity: 3, wind_direction: "E" },
+    { city: "Bologna", temperature: "21°C", humidity: "63%", pressure: "1013 hPa", wind_velocity: 6, wind_direction: "SW" },
+    { city: "Venezia", temperature: "23°C", humidity: "58%", pressure: "1016 hPa", wind_velocity: 12, wind_direction: "NW" }
 ];
 
 
@@ -24,7 +23,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -55,7 +54,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -69,7 +68,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -89,7 +88,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
@@ -103,7 +102,7 @@ function getWeatherContainer(type, weather) {
                     <p class="temperature">Temperatura: ${weather.temperature}</p>
                     <p class="humidity">Umidità: ${weather.humidity}</p>
                     <p class="pressure">Pressione: ${weather.pressure}</p>
-                    <p class="wind">Vento: ${weather.wind}</p>
+                    <p class="wind">Vento: ${weather.wind_velocity}km/h ${weather.wind_direction}</p>
                 </div>
             </div>
             `;
