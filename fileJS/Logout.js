@@ -7,17 +7,13 @@ const information = document.getElementById("information"); // The text above th
 
 if (sun && moon && information) {
   sun.addEventListener("click", function () {
+    // Transition to rise the moon and hide the sun and the information
     information.style.opacity = "0";
-    
-    // Transition to moon and hide sun description
-    moon.style.transition = "top 2s ease, opacity 2s ease"; // Apply smooth transition to the moon
     moon.style.opacity = 1;
-    moon.style.top = "25%"; // Make the moon rise to the center
-    sun.style.transition = "top 2s ease"; // Smooth transition for the sun
-    sun.style.top = "150vh"; // The sun moves off the screen
-    
-    document.body.style.transition = "top 2s ease"; // Smooth transition for the sun
-    document.body.style.backgroundColor = "#0f2964"; // Change the background color to dark (moon mode)
+    moon.style.top = "25%";
+    sun.style.top = "150vh";
+
+    document.body.style.backgroundColor = "#0f2964";
 
     // Create wrapper for title and message
     const wrapper = document.createElement("div");

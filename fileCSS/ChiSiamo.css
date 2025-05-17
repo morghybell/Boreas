@@ -8,44 +8,26 @@ body {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden;
     background-color: #f4c042;
-    transition: background-color 2s ease;
+    text-align: center;
 }
-
-main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
 
 #sun,
 #moon {
-    position: absolute;
+    position: relative;
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    transition: top 2s ease, opacity 2s ease;
-    z-index: 2;
-    cursor: pointer;
 }
 
 #sun {
-    top: 25%;
     background-color: #f4c042;
     border: 5px solid #7a6021;
 }
 
 #moon {
-    top: 150vh;
     background-color: #95c7fa;
     border: 5px solid #67a8f1;
-    opacity: 0;
-    transition: top 2s ease, opacity 2s ease, background-color 2s ease;
 }
 
 .crater {
@@ -225,30 +207,6 @@ main {
     background: #4f0504;
 }
 
-/* Info Logout*/
-.information {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    font-family: "IBM Plex Sans", sans-serif;
-    color: #7a6021;
-    opacity: 1;
-    transition: opacity 1s ease;
-}
-
-/* Goodbye message style */
-.logout-message {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 30px;
-    color: #f0f1e9;
-    text-align: center;
-    margin-top: 10px;
-    opacity: 0;
-    transition: opacity 2s ease;
-}
-
 /* Title */
 #title {
     display: inline-block;
@@ -259,17 +217,51 @@ main {
     margin-bottom: 0px;
     position: relative;
     z-index: 2;
-    color: #f0f1e9;
     transition: opacity 2s ease;
 }
 
-/* Wrapper to center both vertically and horizontally */
-#logout-wrapper {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
+/* Layout */
+.section-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 0 2rem;
+  background-color: rgba(0, 0, 0, 0.275);
+}
+
+.section-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.col {
+  flex: 1 1 50%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.text-col .text {
+  max-width: 500px;
+  margin: auto;
+}
+
+.image-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .section-row {
     flex-direction: column;
-    align-items: center;
+  }
+
+  .section-row.reverse {
+    flex-direction: column;
+  }
+
+  .col {
+    flex: 1 1 100%;
+  }
 }
