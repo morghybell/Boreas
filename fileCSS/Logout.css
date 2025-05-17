@@ -1,15 +1,24 @@
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #111;
-    overflow: hidden;
-    font-family: "IBM Plex Sans", sans-serif;
+html, body {
+  height: 100%; 
+  margin: 0;
+  padding: 0;
 }
+
+body {
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh; 
+  overflow: hidden;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 
 #sun,
 #moon {
@@ -23,13 +32,13 @@ body {
 }
 
 #sun {
-    top: 100px;
+    top: 25%;
     background-color: #f4c042;
     border: 5px solid #7a6021;
 }
 
 #moon {
-    top: 100vh;
+    top: 150vh;
     background-color: #95c7fa;
     border: 5px solid #67a8f1;
     opacity: 0;
@@ -224,6 +233,19 @@ body {
 #sun .eyes-l,
 #sun .eyes-r {
     background: #4f0504;
+}
+
+/* Info Logout*/
+.information {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #7a6021;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 /* Goodbye message style */

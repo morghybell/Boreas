@@ -1,7 +1,13 @@
 #navbar-placeholder {
+  flex-shrink: 0;
   width: 100%;
 }
 
+#footer-placeholder {
+  flex-shrink: 0;
+  width: 100%;
+}
+/******************************************** NAVBAR ********************************************/
 .nav {
   position: relative;
   display: flex;
@@ -75,10 +81,6 @@
   --m: 4rem;
 }
 
-#footer-placeholder {
-  width: 100%;
-}
-
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -100,7 +102,7 @@ h3 {
 footer {
   z-index: 500;
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -176,18 +178,6 @@ footer a:hover {
 
 .col3 {
   font-size: 2rem;
-}
-
-img {
-  height: calc(0.3 * var(--m));
-  object-fit: cover;
-}
-
-.social {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 1rem;
 }
 
 @media screen and (max-width: 1000px) {
