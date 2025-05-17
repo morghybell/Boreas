@@ -1,0 +1,263 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #111;
+    overflow: hidden;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+#sun,
+#moon {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: top 2s ease, opacity 2s ease;
+    z-index: 2;
+    cursor: pointer;
+}
+
+#sun {
+    top: 100px;
+    background-color: #f4c042;
+    border: 5px solid #7a6021;
+}
+
+#moon {
+    top: 100vh;
+    background-color: #95c7fa;
+    border: 5px solid #67a8f1;
+    opacity: 0;
+}
+
+.sun-mode #sun {
+    background-color: #f4c042;
+}
+
+.moon-mode #sun {
+    background-color: #0f2964;
+}
+
+.moon-mode #moon {
+    opacity: 1;
+    top: 50%;
+}
+
+
+.crater {
+    position: absolute;
+    border-radius: 50%;
+    background: #67a8f1;
+}
+
+.crater1 {
+    width: 30px;
+    height: 30px;
+    top: 40px;
+    left: 40px;
+}
+
+.crater2 {
+    width: 15px;
+    height: 15px;
+    top: 20px;
+    left: 110px;
+}
+
+.crater3 {
+    width: 25px;
+    height: 25px;
+    top: 50px;
+    left: 150px;
+}
+
+.crater4 {
+    width: 35px;
+    height: 35px;
+    top: 130px;
+    left: 30px;
+}
+
+.crater5 {
+    width: 25px;
+    height: 25px;
+    top: 160px;
+    left: 100px;
+}
+
+.crater6 {
+    width: 20px;
+    height: 20px;
+    top: 140px;
+    left: 150px;
+}
+
+.beam {
+    width: 5px;
+    height: 30px;
+    background: #7a6021;
+    position: absolute;
+}
+
+.beam1 {
+    transform: rotate(0deg);
+    top: -20px;
+    left: 120px;
+}
+
+.beam2 {
+    transform: rotate(45deg);
+    top: 20px;
+    left: 220px;
+}
+
+.beam3 {
+    transform: rotate(90deg);
+    top: 110px;
+    left: 250px;
+}
+
+.beam4 {
+    transform: rotate(135deg);
+    top: 200px;
+    left: 220px;
+}
+
+.beam5 {
+    transform: rotate(180deg);
+    top: 240px;
+    left: 120px;
+}
+
+.beam6 {
+    transform: rotate(225deg);
+    top: 200px;
+    left: 20px;
+}
+
+.beam7 {
+    transform: rotate(270deg);
+    top: 110px;
+    left: -10px;
+}
+
+.beam8 {
+    transform: rotate(315deg);
+    top: 20px;
+    left: 20px;
+}
+
+.sunbeams {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    animation: spin 28s linear 0s infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blink {
+    0% {
+        height: 15px;
+        top: 0;
+    }
+
+    99% {
+        height: 15px;
+        top: 0;
+    }
+
+    100% {
+        height: 0px;
+        top: 7px;
+    }
+}
+
+.eyes {
+    position: absolute;
+    width: 110px;
+    height: 20px;
+    top: 90px;
+    left: 45px;
+}
+
+.eyes-l {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: blink 7s linear 0s infinite;
+}
+
+.eyes-r {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: blink 7s linear 0s infinite;
+}
+
+#moon .eyes-l,
+#moon .eyes-r {
+    background: #0f2964;
+}
+
+#sun .eyes-l,
+#sun .eyes-r {
+    background: #4f0504;
+}
+
+/* Goodbye message style */
+.logout-message {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 30px;
+    color: #f0f1e9;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+/* Title */
+#title {
+    display: inline-block;
+    font-family: "IBM Plex Sans";
+    font-size: 5rem;
+    transition: color 0.5s ease;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    position: relative;
+    z-index: 2;
+    color: #f0f1e9;
+    transition: opacity 2s ease;
+}
+
+/* Wrapper to center both vertically and horizontally */
+#logout-wrapper {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

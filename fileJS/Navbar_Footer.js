@@ -2,11 +2,11 @@
 const currentUrl = window.location.href;
 const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
 
-// Set the navbar file based on the page
-let navbarFile = 'navbar.html';  // Default navbar file
+// Declare the variable before assigning to it
+let navbarFile = "";
 
 // Set the navbar based on the page being loaded
-if (currentPage === "Home.html") {
+if (currentPage === "Home.html" || currentPage === "Login.html") {
   navbarFile = 'Navbar_Home.html';
 } else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html") {
   navbarFile = 'Navbar_Fruitore.html';
@@ -58,7 +58,17 @@ fetch(navbarFile)
   });
 
 
-fetch("Footer.html")
+// Declare the variable before assigning to it
+let footerFile = "";
+
+// Set the footer based on the page being loaded
+if (currentPage === "Home.html" || currentPage === "Login.html") {
+  footerFile = 'Footer_Home.html';
+} else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html") {
+  footerFile = 'Footer_Fruitore.html';
+}
+
+fetch(footerFile)
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer-placeholder").innerHTML = data;
