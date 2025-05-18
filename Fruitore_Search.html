@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="box">
-            <p>Ciao *nome utente*, di quale città vuoi sapere il meteo previsto?</p>
+            <p id="swelcome">Ciao *nome utente*, di quale città vuoi sapere il meteo previsto?</p>
         </div>
         <div class="box">
             <div id="moon">
@@ -82,6 +82,11 @@
     <div id="weather-row"></div>
 
     <div id="footer-placeholder"></div>
+	
+	<script> 
+		username = localStorage.getItem("username");
+		if (username) document.getElementById("swelcome").innerHTML = `Ciao ${username}, di quale città vuoi sapere il meteo previsto?`;
+	</script>
 
     <script src="fileJS/MenuCitta.js"></script>
     <script src="fileJS/Navbar_Footer.js"></script>

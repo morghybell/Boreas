@@ -78,7 +78,7 @@
 	<script> 
 		username = localStorage.getItem("username");
 		city = localStorage.getItem("city");
-		document.getElementById("welcome").innerHTML = `Ben tornato ${username}, ecco le previsioni per ${city}, la tua città preferita! Vediamo come sarà il tempo oggi.`;
+		if (username && city) document.getElementById("welcome").innerHTML = `Ben tornato ${username}, ecco le previsioni per ${city}, la tua città preferita! Vediamo come sarà il tempo oggi.`;
 	</script>
 
     <script src="fileJS/Days_Select.js" defer></script>
