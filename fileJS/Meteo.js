@@ -99,7 +99,7 @@ function getWeatherContainer(weather) {
     }
 }
 
-function showWeather(city, day) {
+async function showWeather(city, day) {
 	if (day === undefined) {
 		day = document.getElementById("days-select").value;
         city = localStorage.getItem("city");
@@ -108,26 +108,29 @@ function showWeather(city, day) {
 	const data = {
 		city: city,
 		day: day,
-		sessionKey: localStorage.getItem("sessionKey")
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "")
 	};
 
-	fetch('http://localhost:6969', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-		})
-	.then(response => response.text())
-	.then(result => {
-		const obj = JSON.parse(result);
-		updateWeatherContainers(obj);
-		return true;
-	})
-	.catch(error => {
-		console.error('Error: ' + error);
-		return false;
-	});
+	const res = await fetch("http://localhost:6969", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+        const response = await res.json();
+		updateWeatherContainers(response);
+    	return true;
+	} else if (res.status == 401) {
+        alert("Unathorized access to computation server.");
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+	}
 
 	// unreachable
 	return true;

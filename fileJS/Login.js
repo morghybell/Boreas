@@ -18,7 +18,6 @@ document.getElementById("signupForm").onsubmit = async function(e) {
         body: JSON.stringify(data)
     });
 
-
     if (res.ok) {
         const response = await res.json();
         localStorage.setItem("sessionKey", response.sessionKey);
