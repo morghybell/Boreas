@@ -102,12 +102,13 @@ function getWeatherContainer(weather) {
 function showWeather(city, day) {
 	if (day === undefined) {
 		day = document.getElementById("days-select").value;
+        city = localStorage.getItem("city");
 	}
 	
 	const data = {
 		city: city,
 		day: day,
-		key: "TamTamPerSempre"
+		sessionKey: localStorage.getItem("sessionKey")
 	};
 
 	console.log("Request:", data);
