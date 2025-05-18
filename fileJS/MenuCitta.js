@@ -78,7 +78,8 @@ cityInput.addEventListener('focus', () => {
 function showWeather(city, day) {
 	const data = {
 		city: city,
-		day: day
+		day: day,
+		key: "TamTamPerSempre"
 	};
 
 	console.log("Request:", data);
