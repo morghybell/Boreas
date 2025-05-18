@@ -6,7 +6,7 @@ const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
 let navbarFile = "";
 
 // Set the navbar based on the page being loaded
-if (currentPage === "Home.html" || currentPage === "Login.html") {
+if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPage === "Login.html") {
   navbarFile = 'Navbar_Home.html';
 } else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html" || currentPage === "Logout.html") {
   navbarFile = 'Navbar_Fruitore.html';
@@ -62,7 +62,7 @@ fetch(navbarFile)
 let footerFile = "";
 
 // Set the footer based on the page being loaded
-if (currentPage === "Home.html" || currentPage === "Login.html") {
+if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPage === "Login.html") {
   footerFile = 'Footer_Home.html';
 } else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html" || currentPage === "Logout.html") {
   footerFile = 'Footer_Fruitore.html';

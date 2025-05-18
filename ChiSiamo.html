@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chi Siamo</title>
+  <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
   <link rel="stylesheet" href="fileCSS/ChiSiamo.css">
 </head>
 
 <body>
-    <h1 id="title">Boreas</h1>
+  <div id="navbar-placeholder"></div>
+  <h1 id="title">Boreas</h1>
 
-  <div class="section-row">
-    <div class="col image-col">
+  <div class="section-row row1">
+    <div class="colc image-col">
       <div id="sun">
         <div class="sunbeams">
           <div class="beam beam1"></div>
@@ -30,16 +32,24 @@
         </div>
       </div>
     </div>
-    <div class="col text-col">
+    <div class="colc text-colc">
       <div class="text">
-        <h2>I Nostri Valori</h2>
-        <p>Passione, trasparenza e impegno. Crediamo nel potere della collaborazione e nel rispetto per le persone...</p>
+        <h2>Burberi Emanuele Pablo & Bellacci Morgana</h2>
+        <p class="text-p">Studenti del terzo anno del corso di Laurea in Informatica presso l'Università degli Studi di Perugia (Unipg)</p>
       </div>
     </div>
   </div>
 
-  <div class="section-row reverse">
-    <div class="col image-col">
+  <div class="section-row row2">
+    <div class="colc text-colc">
+      <div class="text">
+        <h2>Sistemi Distribuiti e Paralleli</h2>
+        <p class="text-p">Questo progetto è stato sviluppato con lo scopo di fornire un sistema distribuito in grado di fornire agli utenti le previsioni 
+          meteo delle città che preferiscono e agli erogatori un modo per monitorare l'andamento delle visite e degli utilizzi del servizio.
+        </p>
+      </div>
+    </div>
+    <div class="colc image-col">
       <div id="moon">
         <div class="crater crater1"></div>
         <div class="crater crater2"></div>
@@ -53,13 +63,12 @@
         </div>
       </div>
     </div>
-    <div class="col text-col">
-      <div class="text">
-        <h2>La Nostra Missione</h2>
-        <p>Lavoriamo per un futuro più sostenibile e connesso, dove la tecnologia supporta l’essere umano...</p>
-      </div>
-    </div>
   </div>
 
+  <div id="footer-placeholder"></div>
+
+  <script src="fileJS/Navbar_Footer.js"></script>
+
 </body>
+
 </html>
