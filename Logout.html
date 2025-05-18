@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Boreas</title>
     <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
-    <link rel="stylesheet" href="fileCSS/Home.css" />
+    <link rel="stylesheet" href="fileCSS/Logout.css" />
 </head>
 
 <body>
     <div id="navbar-placeholder"></div>
 
-    <div id="world">
-        <h1 id="title">Boreas</h1>
+    <main>
         <div id="sun">
             <div class="sunbeams">
                 <div class="beam beam1"></div>
@@ -42,23 +41,14 @@
                 <div class="eyes-r"></div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div id="slidecontainer">
-        <input type="range" min="0" max="24" value="1" class="slider" id="myRange">
-        <p class="simtime">Simulated time: <span id="demo"></span>:00</p>
+    <div id="information" class="information">
+      Per fare il Logout clicca il sole
     </div>
-
-    <div id="toggle-label-left">Real-time animation</div>
-    <div class="toggle">
-        <div class="switch"></div>
-    </div>
-    <div id="toggle-label-right">Slider-based animation</div>
-
-    <div id="footer-placeholder"></div>
 
     <script src="fileJS/Navbar_Footer.js"></script>
-    <script src="fileJS/Home.js"></script>
+    <script src="fileJS/Logout.js"></script>
 </body>
 
 </html>

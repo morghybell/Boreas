@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Cloudy.css" />
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Moon.css" />
     <link rel="stylesheet" href="fileCSS/Meteo/Meteo_Stormy.css" />
+    <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore_Search.css" />
-    <link rel="stylesheet" href="fileCSS/Navbar.css" />
     <link rel="stylesheet" href="fileCSS/Fruitore.css" />
 </head>
 
@@ -58,32 +58,32 @@
         </div>
     </div>
 
-    <div class="cloud left"></div>
-    <div class="cloud right"></div>
+    <div class="cloud-top left"></div>
+    <div class="cloud-top right"></div>
 
     <div id="menu-select">
         <div class="form-row">
-            <label for="city-input" class="text-style" >Inserisci il nome della città:</label>
+            <label for="city-input" class="text-style">Inserisci il nome della città:</label>
             <div class="input-wrapper">
                 <input type="text" id="city-input" placeholder="Scrivi il nome di una città" autocomplete="on">
                 <ul id="city-suggestions" class="suggestions-list"></ul>
             </div>
-            <label for="days-select" class="text-style" >Previsioni per:</label>
-            <div class="days-select-wrapper">
+            <label for="days-select" class="text-style">Previsioni per:</label>
+            <div class="controls">
                 <select id="days-select"></select>
+                <button id="show-weather" onclick="updateWeatherContainers()">Show Weather</button>
             </div>
-            <button id="show-weather">Show weather</button>
         </div>
     </div>
 
-    <div id="error-message"></div>
+    <!-- Container to hold the weather containers -->
     <div id="weather-row"></div>
-	
+
     <div id="footer-placeholder"></div>
 
-    <script src="fileJS/MenuCitta.js" defer></script>
-    <script src="fileJS/Meteo.js"></script>
-    <script src="fileJS/Navbar.js" defer></script>
+    <script src="fileJS/MenuCitta.js"></script>
+    <script src="fileJS/Navbar_Footer.js"></script>
+    <script src="fileJS/Meteo.js" defer></script>
 </body>
 
 </html>

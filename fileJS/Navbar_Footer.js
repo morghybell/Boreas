@@ -1,13 +1,31 @@
+<<<<<<< HEAD:fileJS/Navbar.js
 fetch('Navbar.html')
+=======
+// Determine the current page
+const currentUrl = window.location.href;
+const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
+
+// Declare the variable before assigning to it
+let navbarFile = "";
+
+// Set the navbar based on the page being loaded
+if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPage === "Login.html") {
+  navbarFile = 'Navbar_Home.html';
+} else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html" || currentPage === "Logout.html") {
+  navbarFile = 'Navbar_Fruitore.html';
+} else if (currentPage === "Rrogatore.html") {
+  navbarFile = 'Navbar_Erogatore.html';
+}
+
+// Fetch the corresponding navbar file
+fetch(navbarFile)
+>>>>>>> main:fileJS/Navbar_Footer.js
   .then(response => response.text())
   .then(data => {
     document.getElementById('navbar-placeholder').innerHTML = data;
 
     const navItems = document.querySelectorAll(".nav-item");
     const indicator = document.querySelector(".nav-indicator");
-
-    const currentUrl = window.location.href;
-    const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
 
     let activeItem = null;
 
@@ -43,7 +61,18 @@ fetch('Navbar.html')
     });
   });
 
-fetch("Footer.html")
+
+// Declare the variable before assigning to it
+let footerFile = "";
+
+// Set the footer based on the page being loaded
+if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPage === "Login.html") {
+  footerFile = 'Footer_Home.html';
+} else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html" || currentPage === "Logout.html") {
+  footerFile = 'Footer_Fruitore.html';
+}
+
+fetch(footerFile)
   .then(response => response.text())
   .then(data => {
     document.getElementById("footer-placeholder").innerHTML = data;
