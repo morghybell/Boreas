@@ -75,38 +75,6 @@ cityInput.addEventListener('focus', () => {
     errorMessage.style.display = 'none'; // Optionally hide the error message if any
 });
 
-function showWeather(city, day) {
-	const data = {
-		city: city,
-		day: day,
-		key: "TamTamPerSempre"
-	};
-
-	console.log("Request:", data);
-
-	fetch('http://localhost:6969', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-		})
-	.then(response => response.text())
-	.then(result => {
-		const obj = JSON.parse(result);
-		console.log("Response from server: ", obj);
-		updateWeatherContainers(obj);
-		return true;
-	})
-	.catch(error => {
-		console.error('Error: ' + error);
-		return false;
-	});
-
-	// unreachable
-	return true;
-}
-
 // Verifica se una città è stata selezionata
 function validateCitySelection() {
     const selectedDay = daysSelect.value;
@@ -125,7 +93,6 @@ function validateCitySelection() {
         showWeather(selectedCity.name, selectedDay);
     }
 }
-
 
 function populateDaysSelect() {
     const weekdays = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];

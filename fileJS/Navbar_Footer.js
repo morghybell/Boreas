@@ -1,6 +1,3 @@
-<<<<<<< HEAD:fileJS/Navbar.js
-fetch('Navbar.html')
-=======
 // Determine the current page
 const currentUrl = window.location.href;
 const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
@@ -19,7 +16,6 @@ if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPag
 
 // Fetch the corresponding navbar file
 fetch(navbarFile)
->>>>>>> main:fileJS/Navbar_Footer.js
   .then(response => response.text())
   .then(data => {
     document.getElementById('navbar-placeholder').innerHTML = data;

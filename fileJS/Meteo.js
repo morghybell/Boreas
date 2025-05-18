@@ -99,6 +99,42 @@ function getWeatherContainer(weather) {
     }
 }
 
+function showWeather(city, day) {
+	if (day === undefined) {
+		day = document.getElementById("days-select").value;
+	}
+	
+	const data = {
+		city: city,
+		day: day,
+		key: "TamTamPerSempre"
+	};
+
+	console.log("Request:", data);
+
+	fetch('http://localhost:6969', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+		})
+	.then(response => response.text())
+	.then(result => {
+		const obj = JSON.parse(result);
+		console.log("Response from server: ", obj);
+		updateWeatherContainers(obj);
+		return true;
+	})
+	.catch(error => {
+		console.error('Error: ' + error);
+		return false;
+	});
+
+	// unreachable
+	return true;
+}
+
 function updateWeatherContainers(weather_arr) {
     const container = document.getElementById("weather-row");
     const daysSelect = document.getElementById("days-select");

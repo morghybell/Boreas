@@ -337,3 +337,9 @@ body {
   z-index: 2;
   color: #f0f1e9;
 }
+
+#w-day {
+  font-size: 2vw;
+  color: #e6e8db;
+}
+

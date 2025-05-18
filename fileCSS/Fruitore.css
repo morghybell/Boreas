@@ -409,3 +409,9 @@ button:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(0, 128, 0, 0.3);
 }
+
+#w-day {
+  font-size: 2vw;
+  color: #e6e8db;
+}
+
