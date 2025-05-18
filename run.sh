@@ -1,22 +1,17 @@
-@echo off
-setlocal
+#!/bin/sh
 
-set URL=http://localhost:8080
-set CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
+URL="http://localhost:8080"
 
-:: Try if Chrome is in PATH
-where chrome >nul 2>&1
-if %errorlevel% equ 0 (
-    start "" chrome %URL%
-) else if exist %CHROME_PATH% (
-    start "" %CHROME_PATH% %URL%
-) else (
-    echo Chrome not found in PATH or at %CHROME_PATH%.
-    echo Please install Chrome or adjust the path in this script.
-    pause
-)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    open -a "Safari" "$URL"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Linux
+    chromium "$URL"
+else
+    echo "Unsupported platform: $OSTYPE"
+    exit 1
+fi
 
-python -m http.server 8080
-
-endlocal
+python3 -m http.server 8080
 
