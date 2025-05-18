@@ -111,8 +111,6 @@ function showWeather(city, day) {
 		sessionKey: localStorage.getItem("sessionKey")
 	};
 
-	console.log("Request:", data);
-
 	fetch('http://localhost:6969', {
 		method: 'POST',
 		headers: {
@@ -123,7 +121,6 @@ function showWeather(city, day) {
 	.then(response => response.text())
 	.then(result => {
 		const obj = JSON.parse(result);
-		console.log("Response from server: ", obj);
 		updateWeatherContainers(obj);
 		return true;
 	})

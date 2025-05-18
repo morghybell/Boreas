@@ -43,6 +43,19 @@ def signin():
     else:
         return jsonify({"error": "Invalid username or password"}), 401
 
+@app.route("/validateSessionKey", methods=["GET"])
+def validate_session_key():
+    data = request.get_json()
+    sessionKey = data.get("sessionKey")
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? ", (sessionKey, ))
+        if not cursor.fetchone():
+            return jsonify({"error": "Invalid sessionKey"}), 401
+    
+    return '', 200
+
 @app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
