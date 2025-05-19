@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set URL=http://localhost:8080
+set URL=http://localhost:8080/Home.html
 set CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
 
 :: Try if Chrome is in PATH

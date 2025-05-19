@@ -1,6 +1,6 @@
 #!/bin/sh
 
-URL="http://localhost:8080"
+URL="http://localhost:8080/Home.html"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
