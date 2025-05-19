@@ -277,13 +277,9 @@ body {
 	font-size: 90%;
 }
 
-/* Toggle switch */
-/* Toggle switch */
 .toggle {
 	background-color: rgba(0, 0, 0, 0.5);
-	/* Semi-transparent black */
 	border: 1px solid rgba(0, 0, 0, 0.2);
-	/* Slightly transparent border */
 	border-radius: 42px;
 	box-shadow: 0 0 5px #ddd;
 	box-sizing: border-box;
@@ -296,7 +292,6 @@ body {
 
 .toggle.on {
 	background: rgba(255, 255, 255, 0.34);
-	/* Semi-transparent white when toggled */
 	padding-left: 28px;
 }
 
@@ -331,13 +326,11 @@ body {
 #title {
 	font-family: "IBM Plex Sans";
 	font-size: 5rem;
-	/* Default size, 5 times the root font size */
 	transition: color 0.5s ease;
 	margin-top: 50px;
 	margin-bottom: 0px;
 	position: relative;
 	z-index: 2;
-	/* Foreground */
 }
 
 .sun-mode #title {
