@@ -40,7 +40,6 @@ window.addEventListener('DOMContentLoaded', () => {
     daysSelect.value = '0';
 });
 
-
 // Funzione per mostrare i suggerimenti delle città
 function displayCitySuggestions(cities) {
     citySuggestions.innerHTML = '';  // Rimuovi i suggerimenti precedenti
@@ -91,10 +90,9 @@ function validateCitySelection() {
         console.log(`Giorni: ${selectedDay}`);
 
         // Qui puoi chiamare la funzione per mostrare il meteo
-        // showWeather(selectedCity.name, selectedDay);
+        showWeather(selectedCity.name, selectedDay);
     }
 }
-
 
 function populateDaysSelect() {
     const weekdays = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
@@ -128,11 +126,10 @@ function populateDaysSelect() {
     daysSelect.value = '0';
 }
 
-
 // Chiamata iniziale
 populateDaysSelect();
-
 
 showWeatherButton.addEventListener('click', () => {
     validateCitySelection();
 });
+

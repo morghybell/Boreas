@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="box">
-            <p>Ben tornato *nome utente*, ecco le previsioni per *nome città*, la tua città preferita! Vediamo come sarà
+            <p id="welcome">Ben tornato *nome utente*, ecco le previsioni per *nome città*, la tua città preferita! Vediamo come sarà
                 il tempo oggi.</p>
         </div>
         <div class="box">
@@ -66,7 +66,7 @@
         <label for="days-select" class="text-style">Previsioni per:</label>
         <div class="controls">
             <select id="days-select"></select>
-            <button id="show-weather" onclick="updateWeatherContainers()">Show Weather</button>
+            <button id="show-weather" onclick="showWeather(undefined)">Show Weather</button>
         </div>
     </div>
 
@@ -75,9 +75,16 @@
 
     <div id="footer-placeholder"></div>
 
+	<script> 
+		username = localStorage.getItem("username");
+		city = localStorage.getItem("city");
+		if (username && city) document.getElementById("welcome").innerHTML = `Ben tornato ${username}, ecco le previsioni per ${city}, la tua città preferita! Vediamo come sarà il tempo oggi.`;
+	</script>
+
     <script src="fileJS/Days_Select.js" defer></script>
     <script src="fileJS/Navbar_Footer.js"></script>
     <script src="fileJS/Meteo.js" defer></script>
 </body>
 
 </html>
+

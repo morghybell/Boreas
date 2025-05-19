@@ -1,19 +1,7 @@
-// Sample weather data
-const sampleWeatherData = [
-    { city: "Roma", temperature: "22°C", humidity: "60%", pressure: "1015 hPa", wind_velocity: 10, wind_direction: "NE" },
-    { city: "Milano", temperature: "20°C", humidity: "65%", pressure: "1012 hPa", wind_velocity: 8, wind_direction: "N" },
-    { city: "Napoli", temperature: "25°C", humidity: "55%", pressure: "1010 hPa", wind_velocity: 15, wind_direction: "SE" },
-    { city: "Torino", temperature: "18°C", humidity: "70%", pressure: "1008 hPa", wind_velocity: 25, wind_direction: "W" },
-    { city: "Firenze", temperature: "22°C", humidity: "60%", pressure: "1014 hPa", wind_velocity: 3, wind_direction: "E" },
-    { city: "Bologna", temperature: "21°C", humidity: "63%", pressure: "1013 hPa", wind_velocity: 6, wind_direction: "SW" },
-    { city: "Venezia", temperature: "23°C", humidity: "58%", pressure: "1016 hPa", wind_velocity: 12, wind_direction: "NW" }
-];
-
-
-function getWeatherContainer(type, weather) {
-    console.log(`Generating weather container for type: ${type} with data:`, weather);
+function getWeatherContainer(weather) {
+    console.log(`Generating weather container for type: ${weather.type} with data:`, weather);
     
-    switch (type) {
+    switch (weather.type) {
         case 1:
             return `
             <div class="weather-container" icon="sunny">
@@ -111,7 +99,44 @@ function getWeatherContainer(type, weather) {
     }
 }
 
-function updateWeatherContainers() {
+async function showWeather(city, day) {
+	if (day === undefined) {
+		day = document.getElementById("days-select").value;
+        city = localStorage.getItem("city");
+	}
+	
+	const data = {
+		city: city,
+		day: day,
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "")
+	};
+
+	const res = await fetch("http://localhost:6969", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+        const response = await res.json();
+		updateWeatherContainers(response);
+    	return true;
+	} else if (res.status == 401) {
+        alert("Unathorized access to computation server.");
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+	}
+
+	// unreachable
+	return true;
+}
+
+function updateWeatherContainers(weather_arr) {
     const container = document.getElementById("weather-row");
     const daysSelect = document.getElementById("days-select");
     
@@ -121,15 +146,13 @@ function updateWeatherContainers() {
     container.innerHTML = "";
 
     for (let i = 0; i < count; i++) {
-        const weather = sampleWeatherData[i % sampleWeatherData.length];
-        const type = (i % 5) + 1;
+        const weather = weather_arr[i];
+		const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
 
-        const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
-
-        const weatherHTML = getWeatherContainer(type, weather);
+        const weatherHTML = getWeatherContainer(weather);
         const dayWrapper = `
             <div class="weather-day">
-                <h4>${label}</h4>
+                <h4 id="w-day">${label}</h4>
                 ${weatherHTML}
             </div>
         `;

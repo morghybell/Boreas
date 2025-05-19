@@ -44,7 +44,10 @@ if (sun && moon && information) {
 
     // Redirect after 5 seconds
     setTimeout(() => {
-      window.location.href = "Home.html";
+        localStorage.removeItem("sessionKey");
+        localStorage.removeItem("city");
+        localStorage.removeItem("username");
+		window.location.href = "Home.html";
     }, 5000);
   });
 }
