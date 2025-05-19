@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Boreas</title>
+    <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
+    <link rel="stylesheet" href="fileCSS/Erogatore.css" />
+</head>
+
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <div class="container">
+        <!-- Sezione Resource Limiting -->
+        <div class="section" id="resources">
+            <h2>Gestione Risorse Utente</h2>
+            <label for="user-resource">Limite Risorse (per utente):</label>
+            <input type="number" id="user-resource" value="100" min="1" max="1000">
+            <button id="increase-resource" class="button">Aumenta Risorse</button>
+            <button id="decrease-resource" class="button">Diminuisci Risorse</button>
+            <p>Risorse correnti: <strong id="resource-status">100</strong></p>
+        </div>
+    </div>
+    
+    <script src="fileJS/Navbar_Footer.js"></script>
+    <script src="fileJS/Erogatore.js"></script>
+</body>
+
+</html>

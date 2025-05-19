@@ -10,7 +10,7 @@ if (currentPage === "Home.html" || currentPage === "ChiSiamo.html" || currentPag
   navbarFile = 'Navbar_Home.html';
 } else if (currentPage === "Fruitore_City.html" || currentPage === "Fruitore_Search.html" || currentPage === "Logout.html") {
   navbarFile = 'Navbar_Fruitore.html';
-} else if (currentPage === "Rrogatore.html") {
+} else if (currentPage === "Erogatore_Dashboard.html" || currentPage === "Erogatore_Risorse.html") {
   navbarFile = 'Navbar_Erogatore.html';
 }
 
