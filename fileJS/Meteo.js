@@ -102,16 +102,16 @@ function getWeatherContainer(weather) {
 async function showWeather(city, day) {
 	if (day === undefined) {
 		day = document.getElementById("days-select").value;
-        city = localStorage.getItem("city");
+		city = String(localStorage.getItem("city") ?? "Perugia")
 	}
 	
 	const data = {
 		city: city,
 		day: day,
-		sessionKey: String(localStorage.getItem("sessionKey") ?? "")
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
 	};
 
-	const res = await fetch("http://localhost:6969", {
+	const res = await fetch("http://localhost:6969/simulateweather", {
         method: "POST",
 	    headers: {
         	'Content-Type': 'application/json'
