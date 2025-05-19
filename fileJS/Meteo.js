@@ -1,6 +1,6 @@
 function getWeatherContainer(weather) {
     console.log(`Generating weather container for type: ${weather.type} with data:`, weather);
-
+    
     switch (weather.type) {
         case 1:
             return `
@@ -100,46 +100,46 @@ function getWeatherContainer(weather) {
 }
 
 async function showWeather(city, day) {
-    if (day === undefined) {
-        day = document.getElementById("days-select").value;
-        city = localStorage.getItem("city");
-    }
+	if (day === undefined) {
+		day = document.getElementById("days-select").value;
+		city = String(localStorage.getItem("city") ?? "Perugia")
+	}
+	
+	const data = {
+		city: city,
+		day: day,
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
 
-    const data = {
-        city: city,
-        day: day,
-        sessionKey: String(localStorage.getItem("sessionKey") ?? "")
-    };
-
-    const res = await fetch("http://localhost:6969", {
+	const res = await fetch("http://localhost:6969/simulateweather", {
         method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
+	    headers: {
+        	'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     });
 
     if (res.ok) {
         const response = await res.json();
-        updateWeatherContainers(response);
-        return true;
-    } else if (res.status == 401) {
+		updateWeatherContainers(response);
+    	return true;
+	} else if (res.status == 401) {
         alert("Unathorized access to computation server.");
     } else {
-        console.log(res);
-        alert("Unknown error.");
+		console.log(res);
+		alert("Unknown error.");
         const response = await res.json();
-        console.log("Response: ", response);
-    }
+		console.log("Response: ", response);
+	}
 
-    // unreachable
-    return true;
+	// unreachable
+	return true;
 }
 
 function updateWeatherContainers(weather_arr) {
     const container = document.getElementById("weather-row");
     const daysSelect = document.getElementById("days-select");
-
+    
     const selectedValue = parseInt(daysSelect.value, 10);
     const count = selectedValue + 1;
 
@@ -147,7 +147,7 @@ function updateWeatherContainers(weather_arr) {
 
     for (let i = 0; i < count; i++) {
         const weather = weather_arr[i];
-        const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
+		const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
 
         const weatherHTML = getWeatherContainer(weather);
         const dayWrapper = `
@@ -158,28 +158,5 @@ function updateWeatherContainers(weather_arr) {
         `;
 
         container.insertAdjacentHTML('beforeend', dayWrapper);
-        const newWeatherDay = container.lastElementChild;
-        resizeCityNameText(newWeatherDay);
     }
 }
-
-function resizeCityNameText(container) {
-    const el = container.querySelector(".city-name");
-    if (!el) return;
-
-    // Reset font size in case this is being resized again (e.g., on window resize)
-    el.style.fontSize = "15vw";
-
-    let fontSize = parseInt(window.getComputedStyle(el).fontSize);
-
-    while (el.scrollWidth > container.offsetWidth && fontSize > 10) {
-        fontSize--;
-        el.style.fontSize = fontSize + "px";
-    }
-}
-
-window.addEventListener("resize", () => {
-    document.querySelectorAll(".weather-day").forEach(day => {
-        resizeCityNameText(day);
-    });
-});
