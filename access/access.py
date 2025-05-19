@@ -81,7 +81,7 @@ def signup():
                 (username, email, city, password, sessionKey)
             )
             conn.commit()
-        return jsonify({"sessionKey": sessionKey, "city": city})
+        return jsonify({"sessionKey": sessionKey, "city": city, "username": username})
     except Exception as e:
         print(traceback.format_exc())
         print("Error: ", e)
