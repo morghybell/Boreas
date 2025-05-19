@@ -107,3 +107,46 @@ button:hover {
 #chk:checked~.signup label {
 	transform: scale(.6);
 }
+
+/* Style for the error banner */
+.error-banner {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    width: 250px; 
+    height: 250px; 
+    background-color: #ff4e4e; 
+    color: black;
+    font-size: 18px;
+    display: none; 
+    z-index: 9999;
+	text-align: center;
+    line-height: 1.4; 
+    padding: 20px; 
+    border-radius: 50%; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+}
+
+#error-message {
+    display: inline-block;
+    width: 80%; 
+    word-wrap: break-word; 
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px; /* Position the close button at the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center the button horizontally */
+}
+
+.close-btn:hover {
+    color: #390000;
+}
