@@ -124,7 +124,7 @@
 
 .city-name {
     font-weight: bold;
-    font-size: 10vw;
+     font-size: clamp(1.5rem, 10vw, 5rem);
     text-align: center;
     position: absolute;
     top: 50%;
@@ -133,8 +133,8 @@
     margin-top: 0;
     width: auto;
     color: #e6e8db;
+    max-width: 90%;
 }
-
 .parameter-color {
     font-size: 2vw;
     color: #e6e8db;
