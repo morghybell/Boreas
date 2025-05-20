@@ -7,7 +7,10 @@ app = Flask(__name__)
 CORS(app)
 
 SESSION_VALIDATION_URL = 'http://localhost:4209/validateSessionKey'
+CHECK_PRIVILEGE_URL = 'http://localhost:4209/checkPrivilege'
 STORE_REQUEST_URL = 'http://localhost:4209/storeRequest'
+
+server_status = True
 
 class Weather:
     card_dir = ["N", "E", "S", "W"]
@@ -50,8 +53,54 @@ def generate_response(city, day):
 
     return res
 
+@app.route("/setServerStatus", methods=["POST"])
+def set_server_status():
+    global server_status
+    
+    data = request.get_json()
+    sessionKey = data.get("sessionKey")
+    server_status = data.get("server_status")
+
+    # Make POST request to validate session
+    try:
+        response = requests.post(CHECK_PRIVILEGE_URL, json={'sessionKey': sessionKey})
+
+        if response.status_code == 200:
+            server_status = bool(server_status) 
+            print(f'server_status: {server_status}')
+            return '', 200
+        else:
+            return jsonify({'status': 'Session key is invalid'}), 401
+
+    except requests.RequestException as e:
+        return jsonify({'error': 'Failed to validate sessionKey', 'details': str(e)}), 502
+
+@app.route("/getServerStatus", methods=["POST"])
+def get_server_status():
+    global server_status
+    
+    data = request.get_json()
+    sessionKey = data.get("sessionKey")
+
+    # Make POST request to validate session
+    try:
+        response = requests.post(CHECK_PRIVILEGE_URL, json={'sessionKey': sessionKey})
+
+        if response.status_code == 200:
+            server_status = bool(server_status) 
+            return jsonify({'server_status': server_status}), 200
+        else:
+            return jsonify({'status': 'Session key is invalid'}), 401
+
+    except requests.RequestException as e:
+        return jsonify({'error': 'Failed to validate sessionKey', 'details': str(e)}), 502
+
 @app.route("/simulateweather", methods=["POST"])
 def simulate():
+    global server_status
+    if server_status == False:
+        raise ConnectionResetError("Server Disabled")
+
     data = request.get_json()
     city = data.get("city")
     sessionKey = data.get("sessionKey")

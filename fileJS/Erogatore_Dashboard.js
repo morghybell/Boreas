@@ -1,15 +1,88 @@
-let serverOn = true;
+let server_status = true;
 
-function toggleServer() {
-  serverOn = !serverOn;
-  const btn = document.getElementById('serverBtn');
-  const light = document.getElementById('server-light');
+async function get_server_status() {
+	const data = {
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
+	
+	const res = await fetch("http://localhost:6969/getServerStatus", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+	
+    if (res.ok) {
+        const response = await res.json();
+		return response.server_status;
+	} else if (res.status == 401) {
+        alert("Unathorized access to dashboard.");
+		return undefined;
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+		return undefined;
+	}
 
-  btn.textContent = serverOn ? 'Server ON' : 'Server OFF';
-  btn.classList.toggle('off', !serverOn);
+	return undefined;
+}
 
-  // Change light color on the server
-  light.style.backgroundColor = serverOn ? '#29cd3a' : '#d32f2f'; // Green for ON, Red for OFF
+async function set_server_status(server_status) {
+	const data = {
+		server_status: server_status,
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
+	
+	const res = await fetch("http://localhost:6969/setServerStatus", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+	
+    if (res.status == 200) {
+		return true;
+	} else if (res.status == 401) {
+        alert("Unathorized access to dashboard.");
+		return false;
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+		return false;
+	}
+
+	return false;
+}
+
+async function toggleServer() {
+	if (await set_server_status(!server_status) === false) {
+		return;
+	}
+
+	server_status = !server_status;
+		
+	update_server_status();
+
+	return;
+}
+
+function update_server_status() {
+	const btn = document.getElementById('serverBtn');
+	const light = document.getElementById('server-light');
+
+	btn.textContent = server_status ? 'Server ON' : 'Server OFF';
+	btn.classList.toggle('off', !server_status);
+
+	// Change light color on the server
+	light.style.backgroundColor = server_status ? '#29cd3a' : '#d32f2f'; // Green for ON, Red for OFF
+	
+	return;
 }
 
 function logout() {
@@ -218,5 +291,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (simulations_data !== undefined) {
 		update_sim_history(simulations_data);
 	}
+
+	server_status = await get_server_status();
+	
+	update_server_status();
+	
+	return;
 });
 

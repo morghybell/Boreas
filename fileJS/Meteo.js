@@ -118,7 +118,14 @@ async function showWeather(city, day) {
         	'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    });
+    }).catch((error) => {
+		alert("The server is currently offline, retry later...");
+		return undefined;
+	});
+
+	if (res === undefined) {
+		return false;
+	}
 
     if (res.ok) {
         const response = await res.json();

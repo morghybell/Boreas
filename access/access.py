@@ -87,6 +87,19 @@ def validate_session_key():
     
     return jsonify({"error": "No more available computation resources"}), 401
 
+@app.route("/checkPrivilege", methods=["POST"])
+def check_privilege():
+    data = request.get_json()
+    session_key = data.get("sessionKey")
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? AND isAdmin = TRUE", (session_key, ))
+        if not cursor.fetchone():
+            return jsonify({"error": "Invalid sessionKey"}), 401
+
+    return '', 200
+
 @app.route("/getDashboardData", methods=["POST"])
 def get_dashboard_data():
     data = request.get_json()
