@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Boreas</title>
     <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
-    <link rel="stylesheet" href="fileCSS/Erogatore.css" />
+    <link rel="stylesheet" href="fileCSS/Erogatore_Dashboard.css" />
 </head>
 
 <body>
@@ -31,22 +31,31 @@
             <div class="card">Numero Utenti: <strong>128</strong></div>
         </div>
 
-        <div class="admin-list">
-            <h3>Admin Registrati</h3>
-            <div class="admin-item">Mario Rossi - mario@example.com</div>
-            <div class="admin-item">Laura Bianchi - laura@example.com</div>
+        <div class="admin-list-section">
+            <h3>Admin</h3>
+            <div class="admin-list" id="admin-list"></div>
         </div>
     </div>
 
-    <!-- Sezione 2 -->
-    <div class="section">
+
+    <!-- Sezione Server -->
+    <div class="section server-section">
         <h2>Controllo Server</h2>
-        <button class="toggle-btn" id="serverBtn" onclick="toggleServer()">Server ON</button>
+
+        <div class="server-container">
+            <div class="server-illustration" id="server-illustration">
+                <div class="server-light" id="server-light"></div>
+                <div class="server-slots"></div>
+            </div>
+
+            <button class="toggle-btn" id="serverBtn" onclick="toggleServer()">Server ON</button>
+        </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="fileJS/Navbar_Footer.js"></script>
-    <script src="fileJS/Erogatore.js"></script>
+    <script src="fileJS/Erogatore_Dashboard.js"></script>
 </body>
 
 </html>
