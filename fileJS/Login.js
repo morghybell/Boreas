@@ -99,3 +99,19 @@ document.getElementById("signinForm").onsubmit = async function (e) {
     }
 };
 
+document.addEventListener('DOMContentLoaded', async () => {
+	const session_key = localStorage.getItem("sessionKey") ?? "";
+	const city = localStorage.getItem("city") ?? "";
+	const username = localStorage.getItem("username") ?? "";
+
+	if (session_key !== "" && city !== "" && username !== "") {
+		window.location.href = "/Fruitore_City.html";
+	} else {	
+		localStorage.removeItem("sessionKey");
+		localStorage.removeItem("city");
+		localStorage.removeItem("username");
+	}
+
+	return;
+});
+

@@ -179,7 +179,6 @@ async function retrieve_users_info() {
 	return undefined;
 }
 
-// Carica la blacklist
 document.addEventListener('DOMContentLoaded', async () => {
 	const users_data = await retrieve_users_info();
 	if (users_data === undefined) return;
