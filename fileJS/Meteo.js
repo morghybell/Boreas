@@ -160,3 +160,25 @@ function updateWeatherContainers(weather_arr) {
         container.insertAdjacentHTML('beforeend', dayWrapper);
     }
 }
+
+function resizeCityNameText(container) {
+    const el = container.querySelector(".city-name");
+    if (!el) return;
+
+    // Reset font size in case this is being resized again (e.g., on window resize)
+    el.style.fontSize = "15vw";
+
+    let fontSize = parseInt(window.getComputedStyle(el).fontSize);
+
+    while (el.scrollWidth > container.offsetWidth && fontSize > 10) {
+        fontSize--;
+        el.style.fontSize = fontSize + "px";
+    }
+}
+
+window.addEventListener("resize", () => {
+    document.querySelectorAll(".weather-day").forEach(day => {
+        resizeCityNameText(day);
+    });
+});
+

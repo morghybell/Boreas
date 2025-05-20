@@ -33,8 +33,8 @@ async function fetchCitySuggestions(query) {
 
 window.addEventListener('DOMContentLoaded', () => {
     // Imposta Perugia come città predefinita
-    cityInput.value = 'Perugia';
-    selectedCity = { name: 'Perugia' }; // Puoi aggiungere anche lat/lon se servono in seguito
+    cityInput.value = localStorage.getItem("city");
+    selectedCity = { name: cityInput.value }; // Puoi aggiungere anche lat/lon se servono in seguito
 
     // Seleziona il primo giorno (cioè oggi)
     daysSelect.value = '0';

@@ -1,0 +1,3 @@
+# requirements.txt
+-r access/requirements.txt
+-r server/requirements.txt

@@ -1,0 +1,3 @@
+[submodule "Zephyros"]
+	path = Zephyros
+	url = https://github.com/Progxy/Zephyros.git

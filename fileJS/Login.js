@@ -47,7 +47,6 @@ document.getElementById("signupForm").onsubmit = async function (e) {
     }
 }
 
-
 document.getElementById("signinForm").onsubmit = async function (e) {
     e.preventDefault();
 
@@ -71,9 +70,14 @@ document.getElementById("signinForm").onsubmit = async function (e) {
         localStorage.setItem("sessionKey", response.sessionKey);
         localStorage.setItem("city", response.city);
         localStorage.setItem("username", response.username);
-        window.location.href = "/Fruitore_City.html";
+        if (response.isAdmin) {
+			window.location.href = "/Erogatore_Dashboard.html";
+		} else {
+			window.location.href = "/Fruitore_City.html";
+		}
     } else {
         const response = await res.json();
+
         // Show the error banner with the message
         const errorMessage = response.error;
 
