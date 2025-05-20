@@ -11,13 +11,15 @@
 
 <body>
     <div id="navbar-placeholder"></div>
+    <button class="logout-btn" onclick="logout()">Sign Out</button>
+    <div id="logout-message" class="hidden">Logout effettuato</div>
 
     <!-- Sezione 1 -->
     <div class="section">
         <h2>Statistiche Sito</h2>
         <div class="charts">
             <div class="chart-container">
-                <canvas id="visiteChart"></canvas>
+                <canvas id="simulChart"></canvas>
             </div>
             <div class="chart-container">
                 <canvas id="utentiChart"></canvas>
@@ -25,7 +27,7 @@
         </div>
 
         <div class="cards">
-            <div class="card">Visite Oggi: <strong>56</strong></div>
+            <div class="card">Simulazioni Oggi: <strong>56</strong></div>
             <div class="card">Numero Utenti: <strong>128</strong></div>
         </div>
 
