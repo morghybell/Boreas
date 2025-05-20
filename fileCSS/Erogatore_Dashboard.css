@@ -1,0 +1,217 @@
+body {
+	background-color: #b0d7fe;
+	margin: 0;
+}
+
+.section {
+	margin-top: 10vh;
+	margin-left: 5vw;
+	margin-right: 5vw;
+	margin-bottom: 5vw;
+	background: #0f2864;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	font-family: "IBM Plex Sans";
+	color: #d2d9ff;
+	text-align: center;
+	align-items: center;
+
+}
+
+h2 {
+	margin-top: 0;
+}
+
+.charts {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	margin: 10px;
+}
+
+.chart-container {
+	flex: 1;
+	min-width: 300px;
+}
+
+.cards {
+	display: flex;
+	gap: 10%;
+	margin-top: 20px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.card {
+	background: #a8d4ff;
+	padding: 15px;
+	border-radius: 8px;
+	width: 40%;
+	color: black;
+}
+
+.admin-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.admin-item {
+  background: #b9dbf7;
+  color: black;
+  padding: 10px 16px;
+  border-radius: 8px;
+  width: 300px;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-email {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.admin-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.server-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.server-illustration {
+  width: 120px;
+  height: 180px;
+  background: #1e1e2f;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.server-light {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #29cd3a; 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.server-illustration::before,
+.server-illustration::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background-color: #ccc;
+  margin: 14px 0;
+  border-radius: 2px;
+}
+
+.server-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.server-slots::before,
+.server-slots::after,
+.server-slots div {
+  height: 10px;
+  background-color: #999;
+  border-radius: 4px;
+  margin: 0 10px;
+}
+
+.server-slots div {
+  background-color: #aaa;
+}
+
+.toggle-btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #29cd3a;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+.toggle-btn.off {
+	background-color: #d32f2f;
+}
+
+.logout-btn {
+	position: fixed;
+	top: 7vh;
+	right: 20px;
+	background-color: #d32f2f;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	font-family: "IBM Plex Sans";
+	font-size: 14px;
+	z-index: 1000;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	width: 6vw;
+	height: 6vh;
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+	background-color: #4e0c0c;
+}
+
+#logout-message {
+	position: fixed;
+	top: 7vh;
+	right: 20px;
+	background-color: #45d32f;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	font-family: "IBM Plex Sans";
+	font-size: 14px;
+	z-index: 1000;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	z-index: 1001;
+	width: 6vw;
+	height: 6vh;
+	aspect-ratio: 1;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: background-color 0.3s;
+}
+
+#logout-message.show {
+	opacity: 1;
+}
+
+#logout-message.hidden {
+	opacity: 0;
+}
