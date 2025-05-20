@@ -88,9 +88,7 @@ function update_server_status() {
 function logout() {
   showLogoutNotification();
   setTimeout(() => {
-	localStorage.removeItem("sessionKey");
-	localStorage.removeItem("city");
-	localStorage.removeItem("username");
+	localStorage.clear();
 	window.location.href = 'Home.html';
   }, 2000);
 }

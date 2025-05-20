@@ -67,10 +67,13 @@ document.getElementById("signinForm").onsubmit = async function (e) {
 
     if (res.ok) {
         const response = await res.json();
+		const current_date = new Date();
         localStorage.setItem("sessionKey", response.sessionKey);
         localStorage.setItem("city", response.city);
         localStorage.setItem("username", response.username);
-        if (response.isAdmin) {
+        localStorage.setItem("isAdmin", response.isAdmin);
+		localStorage.setItem("logTime", current_date.getTime());
+		if (response.isAdmin) {
 			window.location.href = "/Erogatore_Dashboard.html";
 		} else {
 			window.location.href = "/Fruitore_City.html";
@@ -103,13 +106,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const session_key = localStorage.getItem("sessionKey") ?? "";
 	const city = localStorage.getItem("city") ?? "";
 	const username = localStorage.getItem("username") ?? "";
+	const log_time = localStorage.getItem("logTime") ?? Infinity;
+	const is_admin = localStorage.getItem("isAdmin") == 1 ? true : false;
 
-	if (session_key !== "" && city !== "" && username !== "") {
-		window.location.href = "/Fruitore_City.html";
+	const now = new Date();
+	// Current Time in milliseconds plus one hour: 60 minutes in an hour * 60 seconds in a minute * 1000 millisecond in a second
+	const max_time = now.getTime() + 360_000; 
+
+	console.log(is_admin);
+
+	if (session_key !== "" && city !== "" && username !== "" && max_time > log_time) {
+		if (is_admin) {
+			window.location.href = "/Erogatore_Dashboard.html";
+		} else {
+			window.location.href = "/Fruitore_City.html";
+		}
 	} else {	
-		localStorage.removeItem("sessionKey");
-		localStorage.removeItem("city");
-		localStorage.removeItem("username");
+		localStorage.clear();
 	}
 
 	return;
