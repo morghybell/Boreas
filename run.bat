@@ -15,8 +15,9 @@ if %errorlevel% equ 0 (
     echo Please install Chrome or adjust the path in this script.
     pause
 )
-
-python -m http.server 8080
+start cmd /k python -m http.server 8080
+start cmd /k call access\run.bat
+start cmd /k call server\run.bat
 
 endlocal
 

@@ -13,5 +13,7 @@ else
     exit 1
 fi
 
-python3 -m http.server 8080
+alacritty -e bash -c "cd access; ./run.sh" &
+alacritty -e bash -c "cd server; ./run.sh" &
+alacritty -e bash -c "python3 -m http.server 8080" &
 
