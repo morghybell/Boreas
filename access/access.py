@@ -145,6 +145,23 @@ def get_users_info():
 
     return jsonify(users), 200
 
+@app.route("/getRequests", methods=["POST"])
+def get_requests():
+    data = request.get_json()
+    session_key = data.get("sessionKey")
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? AND isAdmin = TRUE", (session_key, ))
+        if not cursor.fetchone():
+            return jsonify({"error": "Invalid sessionKey"}), 401
+
+        cursor.execute("SELECT * FROM requests")
+        rows = cursor.fetchall()
+        requests = [{"username": username, "city": city, "requestId": requestId, "date": date, "day": int(day) + 1} for requestId, city, day, username, date in rows]
+
+    return jsonify(requests), 200
+
 @app.route("/updateUsersInfo", methods=["POST"])
 def update_users():
     data = request.get_json()

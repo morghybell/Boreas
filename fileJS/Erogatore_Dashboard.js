@@ -111,6 +111,68 @@ function updateCharts(charts_data) {
 	return;
 }
 
+async function retrieve_requests() {
+	const data = {
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
+	
+	const res = await fetch("http://localhost:4209/getRequests", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+	
+    if (res.ok) {
+        const requests_data = await res.json();
+		return requests_data;
+	} else if (res.status == 401) {
+        alert("Unathorized access to dashboard.");
+		return undefined;
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+		return undefined;
+	}
+
+	return undefined;
+}
+
+function update_sim_history(requests_data) {
+	const tbody = document.querySelector('#resource-table tbody');
+	tbody.innerHTML = '';
+
+	requests_data.forEach((request) => {
+		const tr = document.createElement('tr');
+
+		const td_sim_id = document.createElement('td');
+		td_sim_id.textContent = request.requestId;
+
+		const td_city = document.createElement('td');
+		td_city.textContent = request.city;
+
+		const td_days = document.createElement('td');
+		td_days.textContent = request.day;
+
+		const td_username = document.createElement('td');
+		td_username.textContent = request.username;
+		
+		const td_sim_date = document.createElement('td');
+		td_sim_date.textContent = request.date;
+
+		tr.appendChild(td_sim_id);
+		tr.appendChild(td_city);
+		tr.appendChild(td_days);
+		tr.appendChild(td_username);
+		tr.appendChild(td_sim_date);
+
+		tbody.appendChild(tr);
+	});
+}
+
 async function retrieve_dashboard_data() {
 	const data = {
 		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
@@ -144,13 +206,17 @@ async function retrieve_dashboard_data() {
 // Load on DOM ready
 document.addEventListener('DOMContentLoaded', async () => {
 	const dashboard_data = await retrieve_dashboard_data();
-	if (dashboard_data === undefined) return;
+	if (dashboard_data !== undefined) {
+		loadAdmins(dashboard_data.admins);
+		updateCharts(dashboard_data.charts_data);
+
+		document.getElementById("tot-sims").innerHTML = `Simulazioni Totali: <strong>${dashboard_data.total_requests}</strong>`;
+		document.getElementById("tot-users").innerHTML = `Numero Utenti: <strong>${dashboard_data.total_users}</strong>`;
+	}
 	
-	loadAdmins(dashboard_data.admins);
-	updateCharts(dashboard_data.charts_data);
-
-    document.getElementById("tot-sims").innerHTML = `Simulazioni Totali: <strong>${dashboard_data.total_requests}</strong>`;
-    document.getElementById("tot-users").innerHTML = `Numero Utenti: <strong>${dashboard_data.total_users}</strong>`;
-
+	const simulations_data = await retrieve_requests();
+	if (simulations_data !== undefined) {
+		update_sim_history(simulations_data);
+	}
 });
 
