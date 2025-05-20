@@ -26,7 +26,8 @@
 				<label for="chk" aria-hidden="true">Sign up</label>
 				<input type="text" name="username" placeholder="Username" required="">
 				<input type="email" name="email" placeholder="Email" required="">
-				<input type="text" name="city" placeholder="La tua Citta'" required="">
+				<input type="text" name="city" list="cities" placeholder="La tua Citta'" required="">
+				<datalist id="cities"></datalist>
 				<input type="password" name="password" placeholder="Password" required="">
 				<button>Sign up</button>
 			</form>

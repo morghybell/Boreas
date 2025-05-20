@@ -128,3 +128,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 	return;
 });
 
+async function set_suggestions() {
+    await fetch("./cities.json")
+	.then(response => {
+		return response.json();
+	})
+	.then(json_data => {
+		cities = json_data;
+	});
+
+    let dt_cities = document.getElementById("cities");
+    for (let l = 0; l < cities.length; l++) {
+        let opt = document.createElement("option");
+        opt.value = cities[l].city;
+        dt_cities.appendChild(opt);
+    }
+
+	return;
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+	await set_suggestions();
+});
+

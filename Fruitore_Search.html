@@ -65,8 +65,8 @@
         <div class="form-row">
             <label for="city-input" class="text-style">Inserisci il nome della città:</label>
             <div class="input-wrapper">
-                <input type="text" id="city-input" placeholder="Scrivi il nome di una città" autocomplete="on">
-                <ul id="city-suggestions" class="suggestions-list"></ul>
+                <input type="text" id="city-input" list="cities" placeholder="Scrivi il nome di una città">
+				<datalist id="cities"></datalist>
             </div>
             <label for="days-select" class="text-style">Previsioni per:</label>
             <div class="controls">
