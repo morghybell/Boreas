@@ -87,8 +87,8 @@ function update_server_status() {
 
 function logout() {
   showLogoutNotification();
+  localStorage.clear();
   setTimeout(() => {
-	localStorage.clear();
 	window.location.href = 'Home.html';
   }, 2000);
 }

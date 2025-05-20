@@ -36,7 +36,9 @@ if (sun && moon && information) {
     wrapper.appendChild(message);
     document.body.appendChild(wrapper);
 
-    // Fade in both title and message after 1 second
+	localStorage.clear();
+    
+	// Fade in both title and message after 1 second
     setTimeout(() => {
       title.style.opacity = "1";
       message.style.opacity = "1";
@@ -44,7 +46,6 @@ if (sun && moon && information) {
 
     // Redirect after 5 seconds
     setTimeout(() => {
-		localStorage.clear();
 		window.location.href = "Home.html";
     }, 5000);
   });
