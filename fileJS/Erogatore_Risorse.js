@@ -1,68 +1,98 @@
-// Simulazione dati dal database
-const utenti = [
-  { username: 'alice', usate: 35, disponibili: 65 },
-  { username: 'bob', usate: 70, disponibili: 30 },
-  { username: 'carlo', usate: 50, disponibili: 50 },
-  { username: 'diana', usate: 20, disponibili: 80 }
-];
-
-function popolaTabella(dati) {
+function popolaTabella(users_data) {
   const tbody = document.querySelector('#resource-table tbody');
   tbody.innerHTML = '';
 
-  dati.forEach(utente => {
+  users_data.forEach((user) => {
     const tr = document.createElement('tr');
 
     const tdUsername = document.createElement('td');
-    tdUsername.textContent = utente.username;
+    tdUsername.textContent = user.username;
 
     const tdUsate = document.createElement('td');
-    tdUsate.textContent = utente.usate;
+    tdUsate.textContent = user.usedResources;
 
     const tdDisponibili = document.createElement('td');
     tdDisponibili.contentEditable = true;
-    tdDisponibili.textContent = utente.disponibili;
+    tdDisponibili.textContent = user.availableResources;
 
     const tdAdmin = document.createElement('td');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = !!utente.admin; // true/false se presente nel dato
-    tdAdmin.appendChild(checkbox);
+    const checkboxAdmin = document.createElement('input');
+    checkboxAdmin.type = 'checkbox';
+    checkboxAdmin.checked = user.isAdmin;
+    tdAdmin.appendChild(checkboxAdmin);
+
+    const tdBlacklist = document.createElement('td');
+    const checkboxBlacklist = document.createElement('input');
+    checkboxBlacklist.type = 'checkbox';
+    checkboxBlacklist.checked = user.isBlackListed;
+    tdBlacklist.appendChild(checkboxBlacklist);
 
     tr.appendChild(tdUsername);
     tr.appendChild(tdUsate);
     tr.appendChild(tdDisponibili);
-    tr.appendChild(tdAdmin); 
+    tr.appendChild(tdAdmin);
+    tr.appendChild(tdBlacklist);
 
     tbody.appendChild(tr);
   });
 }
 
+async function update_users_info(users) {
+	const data = {
+		users: users,
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
 
-// Avvia al caricamento della pagina
-document.addEventListener('DOMContentLoaded', () => {
-  popolaTabella(utenti);
-});
-
-document.getElementById('upload-button').addEventListener('click', () => {
-  const rows = document.querySelectorAll('#resource-table tbody tr');
-  const dataToUpload = [];
-
-  rows.forEach(row => {
-    const username = row.cells[0].textContent.trim();
-    const risorseUsate = parseInt(row.cells[1].textContent.trim(), 10);
-    const risorseDisponibili = parseInt(row.cells[2].textContent.trim(), 10);
-
-    dataToUpload.push({
-      username,
-      usate: risorseUsate,
-      disponibili: risorseDisponibili
+	const res = await fetch("http://localhost:4209/updateUsersInfo", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
     });
-  });
+	
+    if (res.status == 200) {
+		return true;
+	} else if (res.status == 401) {
+        alert("Unathorized access to management resources.");
+		return false;
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+		return false;
+	}
 
-  console.log('Dati da salvare:', dataToUpload);
+	return false;
+}
 
-  showSaveBanner();
+document.getElementById('upload-button').addEventListener('click', async () => {
+	const rows = document.querySelectorAll('#resource-table tbody tr');
+	const users = [];
+
+	rows.forEach(row => {
+		const username = row.cells[0].textContent.trim();
+		const risorseUsate = parseInt(row.cells[1].textContent.trim(), 10);
+		const risorseDisponibili = parseInt(row.cells[2].textContent.trim(), 10);
+		const isAdmin = row.cells[3].querySelector('input[type="checkbox"]').checked; 
+		const isBlacklisted = row.cells[4].querySelector('input[type="checkbox"]').checked; 
+
+		users.push({
+			username: username,
+			availableResources: risorseDisponibili,
+			isBlackListed: isBlacklisted,
+			isAdmin: isAdmin
+		});
+	});
+
+	if (await update_users_info(users) === false) {
+		return;
+	}
+		
+	showSaveBanner();
+	
+	return;
 });
 
 function showSaveBanner() {
@@ -95,20 +125,6 @@ function showLogoutNotification() {
     }, 3000);
 }
 
-//Blacklist
-const blacklist = [
-  'marco99',
-  'lucia_23',
-  'darkwolf',
-  'sara.b',
-  'x_shadow_x',
-  'anonimo77',
-  'hackerino',
-  'nina_b',
-  'errore404',
-  'ghost_user'
-];
-
 function popolaBlacklist(nomi) {
   const tbody = document.querySelector('#blacklist-table tbody');
   tbody.innerHTML = '';
@@ -122,7 +138,50 @@ function popolaBlacklist(nomi) {
   });
 }
 
+async function retrieve_users_info() {
+	const data = {
+		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
+	};
+	
+	const res = await fetch("http://localhost:4209/getUsersInfo", {
+        method: "POST",
+	    headers: {
+        	'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+	
+    if (res.ok) {
+        const users_data = await res.json();
+		return users_data;
+	} else if (res.status == 401) {
+        alert("Unathorized access to management resources.");
+		return undefined;
+    } else {
+		console.log(res);
+		alert("Unknown error.");
+        const response = await res.json();
+		console.log("Response: ", response);
+		return undefined;
+	}
+
+	return undefined;
+}
+
 // Carica la blacklist
-document.addEventListener('DOMContentLoaded', () => {
-  popolaBlacklist(blacklist);
+document.addEventListener('DOMContentLoaded', async () => {
+	const users_data = await retrieve_users_info();
+	if (users_data === undefined) return;
+	
+	popolaTabella(users_data);
+
+	let blacklist = [];
+	users_data.forEach((user) => {
+		if (user.isBlackListed) {
+			blacklist.push(user.username);
+		}
+	});
+
+	popolaBlacklist(blacklist);
 });
+

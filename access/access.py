@@ -145,10 +145,10 @@ def get_users_info():
 
     return jsonify(users), 200
 
-@app.route("/updateUsers", methods=["POST"])
+@app.route("/updateUsersInfo", methods=["POST"])
 def update_users():
     data = request.get_json()
-    username = data.get("users")
+    users = data.get("users")
     session_key = data.get("sessionKey")
 
     try:
@@ -159,8 +159,8 @@ def update_users():
                 return jsonify({"error": "Invalid sessionKey"}), 401
             for user in users:
                 cursor.execute(
-                    "UPDATE users SET isBlackListed = ?, isAdmin = ?, availableResources = ?  WHERE username = ?",
-                    (user.get("isBlackListed"), user.get("isAdmin"), user.get("availableResources"), user.get("username")));
+                    "UPDATE users SET isBlackListed = ?, isAdmin = ?, availableResources = ? WHERE username = ?",
+                    (user.get("isBlackListed"), user.get("isAdmin"), user.get("availableResources"), user.get("username")))
             conn.commit()
         return '', 200
     
@@ -212,6 +212,11 @@ def store_request():
                 "INSERT INTO requests (requestId, city, day, username, date) VALUES (?, ?, ?, ?, ?)",
                 (req_id, city, day, username, datetime.date.today().isoformat())
             )
+            
+            conn.commit()
+            
+            cursor.execute(
+                "UPDATE users SET availableResources = availableResources - 1, usedResources = usedResources + 1 WHERE username = ?", (username))
             conn.commit()
         return '', 200
     except Exception as e:

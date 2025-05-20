@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Boreas</title>
+    <title>Risorse Utenti Boreas</title>
     <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
     <link rel="stylesheet" href="fileCSS/Erogatore_Risorse.css" />
 </head>
 
 <body>
     <div id="navbar-placeholder"></div>
+    <button class="logout-btn" onclick="logout()">Sign Out</button>
+	<div id="logout-message" class="hidden">Logout effettuato</div>
+
 
     <div class="section" id="resource-table-section">
         <h2>Tabella Risorse Utenti</h2>
@@ -22,6 +25,7 @@
                     <th>Risorse Utilizzate</th>
                     <th>Risorse Disponibili</th>
                     <th>Admin</th>
+                    <th>Blacklist</th>
                 </tr>
             </thead>
             <tbody>

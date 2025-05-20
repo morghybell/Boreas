@@ -111,15 +111,15 @@ body {
 }
 
 #blacklist-table tbody tr:nth-child(even) {
-    background-color: #3a3a3a; 
+    background-color: #3a3a3a;
 }
 
 #blacklist-table tbody tr:nth-child(odd) {
-    background-color: #555555; 
+    background-color: #555555;
 }
 
 #blacklist-table tbody tr:hover {
-    background-color: #707070; 
+    background-color: #707070;
 }
 
 #blacklist-table tbody tr:hover {
@@ -236,6 +236,7 @@ body {
     justify-content: center;
     text-align: center;
     transition: background-color 0.3s;
+    pointer-events: none;
 }
 
 #logout-message.show {
