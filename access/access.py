@@ -3,6 +3,7 @@ from flask_cors import CORS
 import sqlite3
 import secrets
 import traceback
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -18,9 +19,22 @@ def init_db():
                 password TEXT NOT NULL,
                 sessionKey TEXT UNIQUE NOT NULL,
                 isBlackListed BOOLEAN NOT NULL,
-                isAdmin BOOLEAN NOT NULL
+                isAdmin BOOLEAN NOT NULL,
+                availableResources INTEGER NOT NULL,
+                usedResources INTEGER NOT NULL,
+                creation DATE NOT NULL
+        )''')
+
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS requests (
+                requestId TEXT PRIMARY KEY,
+                city TEXT NOT NULL,
+                day INTEGER NOT NULL,
+                username TEXT NOT NULL,
+                date DATE NOT NULL
             )
         ''')
+
         conn.commit()
 
         cursor = conn.cursor()
@@ -29,8 +43,8 @@ def init_db():
             return
         
         cursor.execute(
-            "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            ("root", "root", "Perugia", "admin", generate_session_key(), False, True)
+            "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin, availableResources, usedResources, creation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            ("root", "root@root.com", "Perugia", "admin", generate_session_key(), False, True, 0, 0, datetime.date.today().isoformat())
         )
         conn.commit()
     return
@@ -50,23 +64,109 @@ def signin():
         row = cursor.fetchone()
 
     if row:
-        sessionKey, city, isAdmin = row
-        return jsonify({"sessionKey": sessionKey, "city": city, "username": username, "isAdmin": isAdmin})
+        session_key, city, is_admin = row
+        return jsonify({"sessionKey": session_key, "city": city, "username": username, "isAdmin": is_admin})
     else:
         return jsonify({"error": "Invalid username or password"}), 401
 
-@app.route("/validateSessionKey", methods=["GET"])
+@app.route("/validateSessionKey", methods=["POST"])
 def validate_session_key():
     data = request.get_json()
-    sessionKey = data.get("sessionKey")
+    session_key = data.get("sessionKey")
 
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? ", (sessionKey, ))
+        cursor.execute("SELECT availableResources FROM users WHERE sessionKey = ? ", (session_key, ))
+        available_res = cursor.fetchone()[0]
+        
+        if not available_res:
+            return jsonify({"error": "Invalid sessionKey"}), 401
+
+        if available_res > 0:
+            return '', 200
+    
+    return jsonify({"error": "No more available computation resources"}), 401
+
+@app.route("/getDashboardData", methods=["POST"])
+def get_dashboard_data():
+    data = request.get_json()
+    session_key = data.get("sessionKey")
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? AND isAdmin = TRUE", (session_key, ))
         if not cursor.fetchone():
             return jsonify({"error": "Invalid sessionKey"}), 401
+ 
+        cursor.execute("""
+            SELECT creation, COUNT(*) as user_count
+            FROM users
+            GROUP BY creation
+            ORDER BY creation;
+        """)
+        rows = cursor.fetchall()
+        users = [{"date": date, "user_count": count} for date, count in rows]
+
+        cursor.execute("""
+            SELECT date, COUNT(*) as request_count
+            FROM requests
+            GROUP BY date
+            ORDER BY date;
+        """)
+        rows = cursor.fetchall()
+        requests = [{"date": date, "request_count": count} for date, count in rows]
+
+        cursor.execute("SELECT username, email FROM users WHERE isAdmin = TRUE ")
+        rows = cursor.fetchall()
+        admins = [{"username": username, "email": email} for username, email in rows]
+
+        cursor.execute("SELECT COUNT(*) FROM users;")
+        total_users = cursor.fetchone()[0]
+        
+        cursor.execute("SELECT COUNT(*) FROM requests;")
+        total_requests = cursor.fetchone()[0]
+
+    return jsonify({"total_requests": total_requests, "total_users": total_users, "charts_data": {"users": users, "requests": requests}, "admins": admins}), 200
+
+@app.route("/getUsersInfo", methods=["POST"])
+def get_users_info():
+    data = request.get_json()
+    session_key = data.get("sessionKey")
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? AND isAdmin = TRUE", (session_key, ))
+        if not cursor.fetchone():
+            return jsonify({"error": "Invalid sessionKey"}), 401
+
+        cursor.execute("SELECT username, availableResources, usedResources, isBlackListed, isAdmin FROM users")
+        rows = cursor.fetchall()
+        users = [{"username": username, "availableResources": availableResources, "usedResources": usedResources, "isBlackListed": isBlackListed, "isAdmin": isAdmin} for username, availableResources, usedResources, isBlackListed, isAdmin in rows]
+
+    return jsonify(users), 200
+
+@app.route("/updateUsers", methods=["POST"])
+def update_users():
+    data = request.get_json()
+    username = data.get("users")
+    session_key = data.get("sessionKey")
+
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1 FROM users WHERE sessionKey = ? AND isAdmin = TRUE", (session_key, ))
+            if not cursor.fetchone():
+                return jsonify({"error": "Invalid sessionKey"}), 401
+            for user in users:
+                cursor.execute(
+                    "UPDATE users SET isBlackListed = ?, isAdmin = ?, availableResources = ?  WHERE username = ?",
+                    (user.get("isBlackListed"), user.get("isAdmin"), user.get("availableResources"), user.get("username")));
+            conn.commit()
+        return '', 200
     
-    return '', 200
+    except Exception as e:
+        print(traceback.format_exc())
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/signup", methods=["POST"])
 def signup():
@@ -75,7 +175,7 @@ def signup():
     email = data.get("email")
     city = data.get("city")
     password = data.get("password")
-    sessionKey = generate_session_key()
+    session_key = generate_session_key()
 
     try:
         with sqlite3.connect(DB_PATH) as conn:
@@ -89,14 +189,35 @@ def signup():
                 return jsonify({"error": "Email already exists"}), 409
 
             cursor.execute(
-                "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (username, email, city, password, sessionKey, False, False)
+                "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin, availableResources, usedResources, creation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (username, email, city, password, session_key, False, False, 100, 50, datetime.date.today().isoformat())
             )
             conn.commit()
-        return jsonify({"sessionKey": sessionKey, "city": city, "username": username})
+        return jsonify({"sessionKey": session_key, "city": city, "username": username})
     except Exception as e:
         print(traceback.format_exc())
         return jsonify({"error": str(e)}), 500
+
+@app.route("/storeRequest", methods=["POST"])
+def store_request():
+    data = request.get_json()
+    username = data.get("username")
+    city = data.get("city")
+    day = data.get("day")
+    req_id = generate_session_key()
+
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            cursor.execute(
+                "INSERT INTO requests (requestId, city, day, username, date) VALUES (?, ?, ?, ?, ?)",
+                (req_id, city, day, username, datetime.date.today().isoformat())
+            )
+            conn.commit()
+        return '', 200
+    except Exception as e:
+        print(traceback.format_exc())
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     # TODO: Maybe makes sense to factor out the database stuff within a class for Clean-Code

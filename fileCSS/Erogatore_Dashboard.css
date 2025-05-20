@@ -206,6 +206,7 @@ h2 {
 	justify-content: center;
 	text-align: center;
 	transition: background-color 0.3s;
+	pointer-events: none;
 }
 
 #logout-message.show {

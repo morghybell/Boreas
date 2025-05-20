@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 SESSION_VALIDATION_URL = 'http://localhost:4209/validateSessionKey'
+STORE_REQUEST_URL = 'http://localhost:4209/storeRequest'
 
 class Weather:
     card_dir = ["N", "E", "S", "W"]
@@ -63,9 +64,10 @@ def simulate():
 
     # Make POST request to validate session
     try:
-        response = requests.get(SESSION_VALIDATION_URL, json={'sessionKey': sessionKey})
+        response = requests.post(SESSION_VALIDATION_URL, json={'sessionKey': sessionKey})
 
         if response.status_code == 200:
+            requests.post(STORE_REQUEST_URL, json={'city': city, 'day': day, 'username': username})
             return jsonify(generate_response(city, day)), 200
         else:
             return jsonify({'status': 'Session key is invalid'}), 401

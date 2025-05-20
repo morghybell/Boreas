@@ -77,7 +77,10 @@ function showSaveBanner() {
 function logout() {
   showLogoutNotification();
   setTimeout(() => {
-    window.location.href = 'Home.html';
+        localStorage.removeItem("sessionKey");
+        localStorage.removeItem("city");
+        localStorage.removeItem("username");
+	    window.location.href = 'Home.html';
   }, 2000); 
 }
 
