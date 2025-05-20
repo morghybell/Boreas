@@ -56,9 +56,10 @@ def simulate():
     city = data.get("city")
     sessionKey = data.get("sessionKey")
     day = data.get("day")
+    username = data.get("username")
  
-    if not sessionKey or not city or not day:
-        return jsonify({'error': 'Missing sessionKey, city and day'}), 400
+    if not sessionKey or not city or not day or not username:
+        return jsonify({'error': 'Missing sessionKey, city, day and username'}), 400
     
     day = int(day)
 

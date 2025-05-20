@@ -92,6 +92,8 @@ document.getElementById('upload-button').addEventListener('click', async () => {
 		
 	showSaveBanner();
 	
+	popolaBlacklist(users);
+
 	return;
 });
 
@@ -125,17 +127,26 @@ function showLogoutNotification() {
     }, 3000);
 }
 
-function popolaBlacklist(nomi) {
-  const tbody = document.querySelector('#blacklist-table tbody');
-  tbody.innerHTML = '';
+function popolaBlacklist(users) {
+	let blacklisted = [];
+	users.forEach((user) => {
+		if (user.isBlackListed) {
+			blacklisted.push(user.username);
+		}
+	});
 
-  nomi.forEach(username => {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.textContent = username;
-    tr.appendChild(td);
-    tbody.appendChild(tr);
-  });
+	const tbody = document.querySelector('#blacklist-table tbody');
+	tbody.innerHTML = '';
+
+	blacklisted.forEach((username) => {
+		const tr = document.createElement('tr');
+		const td = document.createElement('td');
+		td.textContent = username;
+		tr.appendChild(td);
+		tbody.appendChild(tr);
+	});
+
+	return;
 }
 
 async function retrieve_users_info() {
@@ -174,14 +185,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (users_data === undefined) return;
 	
 	popolaTabella(users_data);
-
-	let blacklist = [];
-	users_data.forEach((user) => {
-		if (user.isBlackListed) {
-			blacklist.push(user.username);
-		}
-	});
-
-	popolaBlacklist(blacklist);
+	popolaBlacklist(users_data);
 });
 

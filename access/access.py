@@ -190,7 +190,7 @@ def signup():
 
             cursor.execute(
                 "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin, availableResources, usedResources, creation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (username, email, city, password, session_key, False, False, 100, 50, datetime.date.today().isoformat())
+                (username, email, city, password, session_key, False, False, 100, 0, datetime.date.today().isoformat())
             )
             conn.commit()
         return jsonify({"sessionKey": session_key, "city": city, "username": username})
@@ -208,6 +208,7 @@ def store_request():
 
     try:
         with sqlite3.connect(DB_PATH) as conn:
+            cursor = conn.cursor()
             cursor.execute(
                 "INSERT INTO requests (requestId, city, day, username, date) VALUES (?, ?, ?, ?, ?)",
                 (req_id, city, day, username, datetime.date.today().isoformat())
@@ -216,7 +217,7 @@ def store_request():
             conn.commit()
             
             cursor.execute(
-                "UPDATE users SET availableResources = availableResources - 1, usedResources = usedResources + 1 WHERE username = ?", (username))
+                "UPDATE users SET availableResources = availableResources - 1, usedResources = usedResources + 1 WHERE username = ?", (username, ))
             conn.commit()
         return '', 200
     except Exception as e:

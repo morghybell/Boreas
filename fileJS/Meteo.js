@@ -108,6 +108,7 @@ async function showWeather(city, day) {
 	const data = {
 		city: city,
 		day: day,
+		username: String(localStorage.getItem("username") ?? "pippo"),
 		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
 	};
 
