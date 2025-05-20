@@ -5,7 +5,6 @@ const utenti = [
   { username: 'carlo', usate: 50, disponibili: 50 },
   { username: 'diana', usate: 20, disponibili: 80 }
 ];
-
 function popolaTabella(dati) {
   const tbody = document.querySelector('#resource-table tbody');
   tbody.innerHTML = '';
@@ -24,19 +23,27 @@ function popolaTabella(dati) {
     tdDisponibili.textContent = utente.disponibili;
 
     const tdAdmin = document.createElement('td');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.checked = !!utente.admin; // true/false se presente nel dato
-    tdAdmin.appendChild(checkbox);
+    const checkboxAdmin = document.createElement('input');
+    checkboxAdmin.type = 'checkbox';
+    checkboxAdmin.checked = !!utente.admin;
+    tdAdmin.appendChild(checkboxAdmin);
+
+    const tdBlacklist = document.createElement('td');
+    const checkboxBlacklist = document.createElement('input');
+    checkboxBlacklist.type = 'checkbox';
+    checkboxBlacklist.checked = !!utente.blacklist;
+    tdBlacklist.appendChild(checkboxBlacklist);
 
     tr.appendChild(tdUsername);
     tr.appendChild(tdUsate);
     tr.appendChild(tdDisponibili);
-    tr.appendChild(tdAdmin); 
+    tr.appendChild(tdAdmin);
+    tr.appendChild(tdBlacklist);
 
     tbody.appendChild(tr);
   });
 }
+
 
 
 // Avvia al caricamento della pagina
@@ -74,24 +81,6 @@ function showSaveBanner() {
     }, 3000); 
 }
 
-function logout() {
-  showLogoutNotification();
-  setTimeout(() => {
-    window.location.href = 'Home.html';
-  }, 2000); 
-}
-
-function showLogoutNotification() {
-    const message = document.getElementById('logout-message');
-    message.classList.remove('hidden');
-    message.classList.add('show');
-
-    setTimeout(() => {
-        message.classList.remove('show');
-        message.classList.add('hidden');
-    }, 3000);
-}
-
 //Blacklist
 const blacklist = [
   'marco99',
@@ -123,3 +112,22 @@ function popolaBlacklist(nomi) {
 document.addEventListener('DOMContentLoaded', () => {
   popolaBlacklist(blacklist);
 });
+
+
+function logout() {
+  showLogoutNotification();
+  setTimeout(() => {
+    window.location.href = 'Home.html';
+  }, 2000);
+}
+
+function showLogoutNotification() {
+  const message = document.getElementById('logout-message');
+  message.classList.remove('hidden');
+  message.classList.add('show');
+
+  setTimeout(() => {
+    message.classList.remove('show');
+    message.classList.add('hidden');
+  }, 3000);
+}

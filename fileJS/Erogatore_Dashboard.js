@@ -45,27 +45,6 @@ function toggleServer() {
   light.style.backgroundColor = serverOn ? '#29cd3a' : '#d32f2f'; // Green for ON, Red for OFF
 }
 
-
-
-
-function logout() {
-  showLogoutNotification();
-  setTimeout(() => {
-    window.location.href = 'Home.html';
-  }, 2000);
-}
-
-function showLogoutNotification() {
-  const message = document.getElementById('logout-message');
-  message.classList.remove('hidden');
-  message.classList.add('show');
-
-  setTimeout(() => {
-    message.classList.remove('show');
-    message.classList.add('hidden');
-  }, 3000);
-}
-
 // Simulated list of admins (replace with DB data later)
 const adminData = [
   { name: 'Mario Rossi', email: 'mario@example.com' },
@@ -100,3 +79,22 @@ function loadAdmins(admins) {
 document.addEventListener('DOMContentLoaded', () => {
   loadAdmins(adminData);
 });
+
+
+function logout() {
+  showLogoutNotification();
+  setTimeout(() => {
+    window.location.href = 'Home.html';
+  }, 2000);
+}
+
+function showLogoutNotification() {
+  const message = document.getElementById('logout-message');
+  message.classList.remove('hidden');
+  message.classList.add('show');
+
+  setTimeout(() => {
+    message.classList.remove('show');
+    message.classList.add('hidden');
+  }, 3000);
+}
