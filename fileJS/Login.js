@@ -10,6 +10,35 @@ document.getElementById("signupForm").onsubmit = async function (e) {
         password: form.password.value
     };
 
+	let is_valid_city = false;
+    for (let l = 0; l < cities.length; l++) {
+    	if (cities[l].city === form.city.value) {
+			is_valid_city = true;
+		}    
+    }
+
+    if (!is_valid_city) {
+		const errorMessage = "Per favore, seleziona una città tra quelle offerte dall'autocompletamento.";
+        
+		// Set the error message to the banner
+        document.getElementById('error-message').innerText = `Failed to signup: ${errorMessage}`;
+
+        // Display the error banner
+        document.getElementById('error-banner').style.display = 'block';
+
+        // Set a timeout to hide the banner after a few seconds 
+        setTimeout(() => {
+            document.getElementById('error-banner').style.display = 'none';
+        }, 5000);
+
+        // Close the banner when the close button is clicked
+        document.getElementById('close-banner').addEventListener('click', () => {
+            document.getElementById('error-banner').style.display = 'none';
+        });
+
+		return;
+	}
+
     const res = await fetch("http://localhost:4209/signup", {
         method: "POST",
         headers: {
@@ -113,8 +142,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	// Current Time in milliseconds plus one hour: 60 minutes in an hour * 60 seconds in a minute * 1000 millisecond in a second
 	const max_time = now.getTime() + 360_000; 
 
-	console.log(is_admin);
-
 	if (session_key !== "" && city !== "" && username !== "" && max_time > log_time) {
 		if (is_admin) {
 			window.location.href = "/Erogatore_Dashboard.html";
@@ -127,6 +154,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	return;
 });
+
+let cities = undefined;
 
 async function set_suggestions() {
     await fetch("./cities.json")

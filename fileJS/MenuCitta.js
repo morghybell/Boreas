@@ -4,7 +4,7 @@ const errorMessage = document.getElementById('error-message');
 const showWeatherButton = document.querySelector('button');
 const daysSelect = document.getElementById('days-select');
 
-let timeout; // Per evitare richieste troppo rapide mentre si digita
+let cities = undefined;
 
 async function set_suggestions() {
     await fetch("./cities.json")
@@ -39,8 +39,18 @@ window.addEventListener('DOMContentLoaded', async () => {
 function validateCitySelection() {
    	const selectedCity = cityInput.value;
 	const selectedDay = daysSelect.value;
+	let is_valid_city = false;
 
-    if (!selectedCity || !selectedDay) {
+    for (let l = 0; l < cities.length; l++) {
+    	if (cities[l].city === selectedCity) {
+			is_valid_city = true;
+		}    
+    }
+
+    if (!is_valid_city) {
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = "Per favore, seleziona una città tra quelle offerte dall'autocompletamento.";
+    } else if (!selectedCity || !selectedDay) {
         errorMessage.style.display = 'block';
         errorMessage.textContent = 'Per favore, seleziona una città e un giorno.';
     } else {
