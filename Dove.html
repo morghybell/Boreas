@@ -7,6 +7,9 @@
     <title>Dove Trovare Boreas</title>
     <link rel="stylesheet" href="fileCSS/Navbar_Footer.css" />
     <link rel="stylesheet" href="fileCSS/Dove.css">
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
 </head>
 
 <body>
@@ -31,13 +34,7 @@
             </div>
         </div>
 
-        <div class="map">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.4208477788283!2d12.386191376633524!3d43.11068117113495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ea0d17c07a7c1%3A0xd58f5e54a61b437a!2sDipartimento%20di%20Matematica%20e%20Informatica%20-%20Universit%C3%A0%20degli%20Studi%20di%20Perugia!5e0!3m2!1sen!2sit!4v1716049267311!5m2!1sen!2sit"
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+        <div class="map" id="map"></div>
 
         <div id="moon">
             <div class="crater crater1"></div>
@@ -64,6 +61,21 @@
     </div>
 
     <div id="footer-placeholder"></div>
+	 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+	  <script>
+		// Create the map and set the view [latitude, longitude], and zoom level
+		const map = L.map('map').setView([43.11589365699772, 12.385127927592247], 16);
+
+		// Add OpenStreetMap tiles
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+		// Add a marker at the coordinates
+		L.marker([43.11589365699772, 12.385127927592247]).addTo(map)
+			.bindPopup('Dipartimento di Matematica e Informatica DMI - UNIPG')
+		    .openPopup();
+	  </script>
 
     <script src="fileJS/Navbar_Footer.js"></script>
 </body>
