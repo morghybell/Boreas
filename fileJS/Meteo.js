@@ -112,8 +112,6 @@ async function showWeather(city, day) {
 		sessionKey: String(localStorage.getItem("sessionKey") ?? "nosessionkey")
 	};
 
-    console.log("Before Request");
-
 	const res = await fetch("http://localhost:6969/simulateweather", {
         method: "POST",
         headers: {
@@ -121,12 +119,9 @@ async function showWeather(city, day) {
         },
         body: JSON.stringify(data)
     }).catch((error) => {
-        console.log("error", error);
 		alert("The server is currently offline, retry later...");
 		return undefined;
 	});
-
-    console.log("res", res);
 
 	if (res === undefined) {
 		return false;
