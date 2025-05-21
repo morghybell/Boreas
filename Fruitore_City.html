@@ -66,7 +66,7 @@
         <label for="days-select" class="text-style">Previsioni per:</label>
         <div class="controls">
             <select id="days-select"></select>
-            <button id="show-weather" onclick="showWeather(undefined)">Show Weather</button>
+            <button id="show-weather">Show Weather</button>
         </div>
     </div>
 
@@ -79,6 +79,10 @@
 		username = localStorage.getItem("username");
 		city = localStorage.getItem("city");
 		if (username && city) document.getElementById("welcome").innerHTML = `Salve ${username}, ecco le previsioni per ${city}, la tua città preferita! Vediamo come sarà il tempo oggi.`;
+        document.getElementById("show-weather").addEventListener("click", async (event) => {
+            event.preventDefault();
+            await showWeather(undefined, undefined);
+        });
 	</script>
 
     <script src="fileJS/Days_Select.js" defer></script>
