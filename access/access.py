@@ -4,12 +4,14 @@ import sqlite3
 import secrets
 import traceback
 import datetime
+import random
+import string
 
 app = Flask(__name__)
 CORS(app)
 DB_PATH = "boreas.db"
 
-def init_db():
+def init_db(gen_data):
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute('''
             CREATE TABLE IF NOT EXISTS users (
@@ -36,8 +38,9 @@ def init_db():
         ''')
 
         conn.commit()
-
+        
         cursor = conn.cursor()
+        
         cursor.execute("SELECT 1 FROM users WHERE username = ?", ("root", ))
         if cursor.fetchone():
             return
@@ -47,6 +50,34 @@ def init_db():
             ("root", "root@root.com", "Perugia", "admin", generate_session_key(), False, True, 0, 0, datetime.date.today().isoformat())
         )
         conn.commit()
+
+        if gen_data:
+            blacklist_cnt = 50
+            cities = [ "Cortona", "Perugia", "Milan", "Rome" ]
+            days = ['2025-02-12', '2025-01-31', '2025-03-21', '2025-04-10', '2025-01-14', '2025-03-13', '2025-02-24', '2025-01-19', '2025-04-03', '2025-05-11']
+            for i in range(0, 1500):
+                username = "user_" + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(random.randint(4, 10))) 
+                city = cities[random.randint(0, len(cities) - 1)]
+                day = random.randint(0, 6)
+                req_id = generate_session_key()
+                cursor.execute(
+                    "INSERT INTO requests (requestId, city, day, username, date) VALUES (?, ?, ?, ?, ?)",
+                    (req_id, city, day, username, days[random.randint(0, len(days) - 1)])
+                )
+                
+                conn.commit()
+
+                domain = ["rd", "dr", "bd", "dw", "qw"]
+                email = f"{username}@{domain[i % len(domain)]}.com"
+                print(email)
+
+                cursor.execute(
+                    "INSERT INTO users (username, email, city, password, sessionKey, isBlackListed, isAdmin, availableResources, usedResources, creation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (username, email, city, "dsa", generate_session_key(), blacklist_cnt > 0, False, 0, 0, days[random.randint(0, len(days) - 1)])
+                )
+                conn.commit()
+                
+                blacklist_cnt -= 1
     return
 
 def generate_session_key():
@@ -257,6 +288,6 @@ def store_request():
 
 if __name__ == "__main__":
     # TODO: Maybe makes sense to factor out the database stuff within a class for Clean-Code
-    init_db()
+    init_db(True)
     app.run(host="0.0.0.0", port=4209, debug=True)
 

@@ -18,20 +18,22 @@
     <div class="section" id="resource-table-section">
         <h2>Tabella Risorse Utenti</h2>
         <div id="save-banner">Modifiche salvate</div>
-        <table id="resource-table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Risorse Utilizzate</th>
-                    <th>Risorse Disponibili</th>
-                    <th>Admin</th>
-                    <th>Blacklist</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- righe inserite dinamicamente -->
-            </tbody>
-        </table>
+        <div id="table-wrapper">
+            <table id="resource-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Risorse Utilizzate</th>
+                        <th>Risorse Disponibili</th>
+                        <th>Admin</th>
+                        <th>Blacklist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- righe inserite dinamicamente -->
+                </tbody>
+            </table>
+        </div>
 
         <button id="upload-button" class="upload-btn">Salva Modifiche</button>
     </div>
@@ -39,16 +41,18 @@
     <!-- Blacklist Section -->
     <div class="section" id="blacklist-section">
         <h2>Blacklist Utenti</h2>
-        <table id="blacklist-table">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- righe inserite dinamicamente -->
-            </tbody>
-        </table>
+        <div id="bl-table-wrapper">
+            <table id="blacklist-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- righe inserite dinamicamente -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
