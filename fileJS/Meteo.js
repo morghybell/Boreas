@@ -134,8 +134,9 @@ async function showWeather(city, day) {
 
     if (res.ok) {
         const response = await res.json();
-		updateWeatherContainers(response);
-    	return true;
+        console.log(response);
+		//updateWeatherContainers(response);
+        return;
 	} else if (res.status == 401) {
         alert("Unathorized access to computation server.");
     } else {
@@ -146,7 +147,7 @@ async function showWeather(city, day) {
 	}
 
 	// unreachable
-	return true;
+	return;
 }
 
 function updateWeatherContainers(weather_arr) {
