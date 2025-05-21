@@ -10,12 +10,12 @@ document.getElementById("signupForm").onsubmit = async function (e) {
         password: form.password.value
     };
 
-	let is_valid_city = true;
-    // for (let l = 0; l < cities.length; l++) {
-    // 	if (cities[l].city === form.city.value) {
-	// 		is_valid_city = true;
-	// 	}    
-    // }
+	let is_valid_city = false;
+    for (let l = 0; l < cities.length; l++) {
+    	if (cities[l].city === form.city.value) {
+			is_valid_city = true;
+		}    
+    }
 
     if (!is_valid_city) {
 		const errorMessage = "Per favore, seleziona una città tra quelle offerte dall'autocompletamento.";
@@ -177,6 +177,6 @@ async function set_suggestions() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-	//await set_suggestions();
+	await set_suggestions();
 });
 
