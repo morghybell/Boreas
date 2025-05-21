@@ -239,6 +239,10 @@ body {
     margin-bottom: 5rem;
 }
 
+#map{
+    z-index: -1;
+}
+
 .contact-info {
     background: #0f2964;
     padding: 1.5rem;
