@@ -285,7 +285,6 @@ def store_request():
         print(traceback.format_exc())
         return jsonify({"error": str(e)}), 500
 
-
 if __name__ == "__main__":
     # TODO: Maybe makes sense to factor out the database stuff within a class for Clean-Code
     init_db(True)

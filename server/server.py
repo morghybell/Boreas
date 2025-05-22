@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import random
+from zephyros import Zephyros
 
 app = Flask(__name__)
 CORS(app)
@@ -12,35 +13,12 @@ STORE_REQUEST_URL = 'http://localhost:4209/storeRequest'
 
 server_status = True
 
-class Weather:
-    card_dir = ["N", "E", "S", "W"]
-
-    def __init__(self):
-        self.type = random.randint(0, 4) + 1
-        self.temperature = str(random.randint(-50, 50)) + "°"
-        self.pressure = str((random.randint(0, 256)) + 1000) + "hPa"
-        self.humidity = str(random.randint(0, 100)) + "%"
-        self.wind_velocity = random.randint(0, 100) 
-        direction = random.randint(0, 360)
-        self.wind_direction = str(direction) + "°" + self.card_dir[direction // 90]
-        pass
-
-    def gen_weather(self):
-        self.type = random.randint(0, 4) + 1
-        self.temperature = str(random.randint(-50, 50)) + "°"
-        self.pressure = str((random.randint(0, 256)) + 1000) + "hPa"
-        self.humidity = str(random.randint(0, 100)) + "%"
-        self.wind_velocity = random.randint(0, 100) 
-        direction = random.randint(0, 360)
-        self.wind_direction = str(direction) + "°" + self.card_dir[direction // 90]
-        return
-
 def generate_response(city, day):
     res = []
-    weather = Weather()
+    weather = Zephyros()
 	
-    for i in range (0, day + 1):	    
-        weather.gen_weather()
+    for _ in range (0, day + 1):	    
+        weather.simulate_weather(city)
         res.append({
             "city": city,
             "type": weather.type,
