@@ -6,7 +6,6 @@ class WeatherStatus(ctypes.Structure):
     _fields_ = [
         ("temp", ctypes.c_double),
         ("pressure", ctypes.c_double),
-        ("radiative_heat", ctypes.c_double),
         ("humidity", ctypes.c_double),
         ("wind_velocity", ctypes.c_double),
         ("wind_direction", ctypes.c_uint8),
@@ -22,7 +21,6 @@ class Zephyros:
         self.weather = WeatherStatus(
                             random.randint(-25, 25),
                             random.randint(1000, 1500),
-                            random.randint(0, 50),
                             random.randint(0, 100),
                             random.randint(0, 100),
                             random.randint(0, 360),
@@ -32,17 +30,17 @@ class Zephyros:
     def simulate_weather(self, city):
         # Set the external function skeleton
         simulate_weather = self.zephyros_lib.simulate_weather
-        simulate_weather.argtypes = [ctypes.POINTER(WeatherStatus), ctypes.c_uint64]
+        simulate_weather.argtypes = [ctypes.POINTER(WeatherStatus), ctypes.c_uint64, ctypes.c_uint8]
         simulate_weather.restype = WeatherStatus
 
         # Call the function
-        self.weather = simulate_weather(ctypes.byref(self.weather), random.randint(7, 700_000) * len(city))
+        self.weather = simulate_weather(ctypes.byref(self.weather), random.randint(7, 700_000) * len(city), 1)
 
-        self.temperature = str(self.weather.temp) + "°"
-        self.pressure = str(self.weather.pressure) + "hPa"
-        self.humidity = str(self.weather.humidity) + "%"
-        self.wind_velocity = self.weather.wind_velocity 
-        self.wind_direction = str(self.weather.wind_direction) + "°" + self.card_dir[self.weather.wind_direction // 90]
+        self.temperature = str(round(self.weather.temp, 1)) + "°"
+        self.pressure = str(round(self.weather.pressure)) + "hPa"
+        self.humidity = str(round(self.weather.humidity)) + "%"
+        self.wind_velocity = round(self.weather.wind_velocity) 
+        self.wind_direction = str(round(self.weather.wind_direction)) + "°" + self.card_dir[round(self.weather.wind_direction) // 90]
         
         if self.weather.temp < 0 and self.weather.humidity > 65:
             self.type = 2
