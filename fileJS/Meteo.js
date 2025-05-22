@@ -130,7 +130,7 @@ async function showWeather(city, day) {
     if (res.ok) {
         const response = await res.json();
         console.log(response);
-		//updateWeatherContainers(response);
+		updateWeatherContainers(response);
         return;
 	} else if (res.status == 401) {
         alert("Unathorized access to computation server.");
