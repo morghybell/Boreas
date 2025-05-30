@@ -5,7 +5,6 @@
     --blend-dir: top right;
 }
 
-/* se qui gli metti border-radius: 100% allora diventa tondo*/
 [icon] {
     flex: none;
     position: relative;
@@ -31,8 +30,7 @@
     --blend-to: 65%;
 }
 
-/* SUNNY */
-/* --------------------- */
+/* Sunny */
 .sun-ico {
     position: absolute;
     left: 80%;

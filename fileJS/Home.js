@@ -1,4 +1,4 @@
-//this for slider based - setting up slider
+// This for slider based - setting up slider
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value;
@@ -7,7 +7,7 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
-//Get time funtion - it passes time to the animation control function gettimeofday
+// Get time funtion - it passes time to the animation control function gettimeofday
 function updatetime() {
 	var now = new Date();
     gettimeofday(now.getHours());
@@ -16,7 +16,7 @@ function updatetime() {
 	output.innerHTML = now.getHours();
 }
 
-//Animation control function
+// Animation control function
 function gettimeofday(now) {
 	hour = now;
 	if (hour >= 0 && hour < 5) { // NIGHT
@@ -36,7 +36,7 @@ function gettimeofday(now) {
 		document.body.classList.add('moon-mode');
         document.body.classList.remove('sun-mode');
 	}
-	if (hour >= 5 && hour < 12) {// MORNING (DAY)
+	if (hour >= 5 && hour < 12) { // MORNING (DAY)
 		timeofdaypercent = hour - 5;
 		timeofdaypercent = (timeofdaypercent / 7) * 100;
 		var sun = document.getElementById('sun');
@@ -53,7 +53,7 @@ function gettimeofday(now) {
 		document.body.classList.add('sun-mode');
         document.body.classList.remove('moon-mode');
 	}
-	if (hour >= 12 && hour < 19) {// AFTERNOON (DAY)
+	if (hour >= 12 && hour < 19) { // AFTERNOON (DAY)
 		timeofdaypercent = hour - 12;
 		timeofdaypercent = (timeofdaypercent / 7) * 100;
 		var sun = document.getElementById('sun');
@@ -72,7 +72,7 @@ function gettimeofday(now) {
 		document.body.classList.add('sun-mode');
         document.body.classList.remove('moon-mode');
 	}
-	if (hour >= 19 && hour <= 24) {// NIGHT
+	if (hour >= 19 && hour <= 24) { // NIGHT
 		timeofdaypercent = hour - 20;
 		timeofdaypercent = (timeofdaypercent / 5) * 100;
 		var moon = document.getElementById('moon');
@@ -91,12 +91,11 @@ function gettimeofday(now) {
 	}
 }
 
-
-//Start the loop going based of real time
+// Start the loop going based of real time
 updatetime();
 var timeloop = setInterval(updatetime, 1000);
 
-//Toggle switch functions
+// Toggle switch functions
 var togglestate=0;
 document.getElementsByClassName('toggle')[0].onclick = function() {
   this.classList.toggle('on');

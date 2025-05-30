@@ -35,7 +35,7 @@
     --blend-to: 90%;
 }
 
-/* CLOUDY - Top Right (default small cloud) */
+/* Cloudy */
 .cloud {
     position: absolute;
     top: 0.1em;
@@ -46,7 +46,6 @@
     background-color: #fff;
     box-shadow:
         0 0 20px -5px rgb(255, 255, 255);
-    /* Soft outer shadow for blending */
     opacity: 0.9;
     animation: move 3000ms infinite ease-in-out;
 }
@@ -73,7 +72,6 @@
     height: 0.3em;
 }
 
-/* CLOUDY - Bottom Right (larger cloud) */
 .cloud+.cloud {
     top: auto;
     bottom: 5%;

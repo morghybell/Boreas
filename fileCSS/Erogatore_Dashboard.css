@@ -83,6 +83,7 @@ h2 {
   font-size: 16px;
 }
 
+/* Server */
 .server-container {
   display: flex;
   flex-direction: column;
@@ -158,6 +159,7 @@ h2 {
 	background-color: #d32f2f;
 }
 
+/* Logout */
 .logout-btn {
 	position: fixed;
 	top: 7vh;
@@ -217,6 +219,7 @@ h2 {
 	opacity: 0;
 }
 
+/* Resource */
 #resource-table-section {
     margin: 10vh 9vw 5vh 9vw;
     background: #0f2864;

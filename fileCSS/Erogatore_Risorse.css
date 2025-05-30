@@ -3,6 +3,7 @@ body {
     margin: 0;
 }
 
+/* Resource */
 #resource-table-section {
     margin: 10vh 9vw 5vh 9vw;
     background: #0f2864;
@@ -83,6 +84,7 @@ body {
     box-shadow: inset 0 0 0 2px #0288d1;
 }
 
+/* Blacklist */
 #blacklist-section {
     margin: 5vh 9vw;
     background: #0f2864;
@@ -138,8 +140,6 @@ body {
     background-color: #888888;
 }
 
-
-
 /* Responsive container */
 @media screen and (max-width: 768px) {
 
@@ -154,6 +154,7 @@ body {
     }
 }
 
+/* Upload Button */
 .upload-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -198,7 +199,7 @@ body {
     pointer-events: auto;
 }
 
-
+/* Logout */
 .logout-btn {
     position: fixed;
     top: 7vh;
@@ -225,7 +226,6 @@ body {
 .logout-btn:hover {
     background-color: #4e0c0c;
 }
-
 
 #logout-message {
     position: fixed;

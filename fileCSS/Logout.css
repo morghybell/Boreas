@@ -238,7 +238,7 @@ main {
     transition: opacity 1s ease;
 }
 
-/* Goodbye message style */
+/* Goodbye Message Style */
 .logout-message {
     font-family: "IBM Plex Sans", sans-serif;
     font-size: 30px;
@@ -263,7 +263,7 @@ main {
     transition: opacity 2s ease;
 }
 
-/* Wrapper to center both vertically and horizontally */
+/* Wrapper to Center (vertically and horizontally) */
 #logout-wrapper {
     position: absolute;
     top: 65%;

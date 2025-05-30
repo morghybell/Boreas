@@ -30,8 +30,7 @@
 }
 
 
-/* STORMY */
-/* --------------------- */
+/* Stormy */
 [icon='stormy']::before {
     --shadow: rgba(255, 255, 255, 0);
     content: '';
@@ -49,9 +48,9 @@
 [icon='stormy'] .cloud-stormy {
     position: absolute;
     top: 0.1em;
-    left: 60%; /* Slight repositioning */
-    width: 1.5em;  /* Increased width */
-    height: 0.6em; /* Increased height */
+    left: 60%;
+    width: 1.5em;  
+    height: 0.6em;
     border-radius: 0.4em;
     background-color: #2c3e50;
     box-shadow: 0 0 30px -5px rgba(44, 62, 80, 0.7);
@@ -96,8 +95,8 @@
 [icon='stormy'] li::before,
 [icon='stormy'] li::after {
     position: absolute;
-    width: .02em;  /* Increased from .005em */
-    height: .05em; /* Increased from .02em */
+    width: .02em;  
+    height: .05em; 
     border-radius: 10%;
     background-color: #eee;
     opacity: 0;

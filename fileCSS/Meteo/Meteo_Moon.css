@@ -5,7 +5,6 @@
     --blend-dir: top right;
 }
 
-/* se qui gli metti border-radius: 100% allora diventa tondo*/
 [icon] {
     flex: none;
     position: relative;
@@ -32,16 +31,15 @@
     --blend-dir: bottom right;
 }
 
-/* SUPERMOON */
-/* --------------------- */
+/* Supermoon */
 [icon="supermoon"] {
-    position: relative;    /* Needed for containing the absolute ::before */
+    position: relative;   
     overflow: hidden;
 }
 
 [icon="supermoon"]::before {
     content: '';
-    position: absolute; /* stretch inside parent */
+    position: absolute; 
     top: 0;
     left: 0;
     right: 0;

@@ -8,7 +8,7 @@ function populateDaysSelect() {
 
         let dayName = weekdays[date.getDay()];
 
-        // Cambia "Oggi" per il primo giorno e "Domani" per il secondo
+        // Set "Today" for the first day and "Tomorrow" for the second
         if (i === 0) {
             dayName = 'Oggi';
         } else if (i === 1) {
@@ -27,10 +27,10 @@ function populateDaysSelect() {
         daysSelect.appendChild(option);
     }
 
-    // Imposta "oggi" (valore 0) come selezionato di default
+    // Set "Today" (value 0) as selected by default
     daysSelect.value = '0';
 }
 
 
-// Chiamata iniziale
+// Initial call
 populateDaysSelect();

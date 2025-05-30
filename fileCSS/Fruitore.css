@@ -19,19 +19,16 @@ body {
       #000033 100%);
 }
 
-/* CLOUDS TOP */
+/* Clouds Top */
 .cloud-top {
   position: absolute;
   border-radius: 60px;
-  /* Make them more oval */
   background-color: #fff;
   box-shadow:
     0 0 20px -5px rgb(255, 255, 255);
-  /* Soft outer shadow for blending */
   opacity: 0.9;
 }
 
-/* Fluffy parts of the cloud */
 .cloud-top::before,
 .cloud-top::after {
   content: '';
@@ -42,7 +39,6 @@ body {
   bottom: 25%;
 }
 
-/* === Left cloud (smaller, moves back and forth near center-left) === */
 .cloud-top.left {
   top: 15%;
   left: 30%;
@@ -63,7 +59,6 @@ body {
   height: 25px;
 }
 
-/* === Right cloud (smaller, moves back and forth near center-right) === */
 .cloud-top.right {
   top: 25%;
   left: 60%;
@@ -91,12 +86,10 @@ body {
 
   50% {
     transform: translateX(40px);
-    /* Drift right */
   }
 
   100% {
     transform: translateX(0);
-    /* Return to original position */
   }
 }
 
@@ -153,7 +146,6 @@ body {
   height: 22.5px;
   top: 30px;
   right: 97.5px;
-  /* (150 - 30 - 22.5) */
 }
 
 .crater2 {
@@ -161,7 +153,6 @@ body {
   height: 11.25px;
   top: 15px;
   right: 56.25px;
-  /* (150 - 75 - 11.25) */
 }
 
 .crater3 {
@@ -169,7 +160,6 @@ body {
   height: 18.75px;
   top: 37.5px;
   right: 18.75px;
-  /* (150 - 25 - 18.75) */
 }
 
 .crater4 {
@@ -177,7 +167,6 @@ body {
   height: 26.25px;
   top: 97.5px;
   right: 101.25px;
-  /* (150 - 13.5 - 26.25) */
 }
 
 .crater5 {
@@ -341,7 +330,7 @@ body {
   padding: 20px;
 }
 
-/* Select Menu style */
+/* Select Menu Style */
 #menu-select {
   display: flex;
   flex-direction: column;
@@ -360,7 +349,7 @@ body {
   margin-bottom: 15px;
 }
 
-/* Day Select style */
+/* Day Select Style */
 .days-select-wrapper {
   display: flex;
   flex-direction: column;
@@ -386,7 +375,7 @@ body {
   font-family: "IBM Plex Sans";
 }
 
-/* Button style */
+/* Button Style */
 button {
   font-size: 30px;
   background-color: #ffffff5d;

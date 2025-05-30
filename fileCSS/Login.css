@@ -28,7 +28,7 @@ body {
 	display: none;
 }
 
-/* SIGN UP */
+/* Sign Up */
 .signup {
 	position: relative;
 	width: 100%;
@@ -81,12 +81,11 @@ button:hover {
 	background: #ffffff12;
 }
 
-/* SIGN IN */
+/* Sign In */
 .signin {
 	height: 430px;
 	background: #95c7fa;
 	border-radius: 60% / 40%;
-	/* transition curve radius */
 	transform: translateY(-180px);
 	transition: transform 0.8s ease-in-out;
 }
@@ -108,7 +107,7 @@ button:hover {
 	transform: scale(.6);
 }
 
-/* Style for the error banner */
+/* Error Banner Style */
 .error-banner {
     position: fixed; 
     top: 50%; 
@@ -142,9 +141,9 @@ button:hover {
     font-size: 20px;
     cursor: pointer;
     position: absolute;
-    bottom: 10px; /* Position the close button at the bottom */
+    bottom: 10px; 
     left: 50%;
-    transform: translateX(-50%); /* Center the button horizontally */
+    transform: translateX(-50%); 
 }
 
 .close-btn:hover {

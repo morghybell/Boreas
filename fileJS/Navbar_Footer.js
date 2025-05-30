@@ -2,7 +2,6 @@
 const currentUrl = window.location.href;
 const currentPage = currentUrl.substring(currentUrl.lastIndexOf("/") + 1);
 
-// Declare the variable before assigning to it
 let navbarFile = "";
 
 // Set the navbar based on the page being loaded
@@ -58,7 +57,6 @@ fetch(navbarFile)
   });
 
 
-// Declare the variable before assigning to it
 let footerFile = "";
 
 // Set the footer based on the page being loaded

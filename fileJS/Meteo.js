@@ -141,7 +141,7 @@ async function showWeather(city, day) {
 		console.log("Response: ", response);
 	}
 
-	// unreachable
+	// Unreachable
 	return;
 }
 
@@ -156,7 +156,7 @@ function updateWeatherContainers(weather_arr) {
 
     for (let i = 0; i < count; i++) {
         const weather = weather_arr[i];
-		const label = daysSelect.options[i].textContent; // Get text like "Oggi (15/05)"
+		const label = daysSelect.options[i].textContent; // Get text like "Today (15/05)"
 
         const weatherHTML = getWeatherContainer(weather);
         const dayWrapper = `
@@ -174,7 +174,7 @@ function resizeCityNameText(container) {
     const el = container.querySelector(".city-name");
     if (!el) return;
 
-    // Reset font size in case this is being resized again (e.g., on window resize)
+    // Reset font size in case this is being resized again
     el.style.fontSize = "15vw";
 
     let fontSize = parseInt(window.getComputedStyle(el).fontSize);

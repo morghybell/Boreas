@@ -26,16 +26,15 @@ async function set_suggestions() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    // Imposta Perugia come città predefinita
     cityInput.value = localStorage.getItem("city");
 
-    // Seleziona il primo giorno (cioè oggi)
+    // Select "Today"
     daysSelect.value = '0';
 
 	await set_suggestions();
 });
 
-// Verifica se una città è stata selezionata
+// Check if a city has been selected
 function validateCitySelection() {
    	const selectedCity = cityInput.value;
 	const selectedDay = daysSelect.value;
@@ -56,7 +55,7 @@ function validateCitySelection() {
     } else {
         errorMessage.style.display = 'none';
 
-        // Qui puoi chiamare la funzione per mostrare il meteo
+        // Call function to show weather
         showWeather(selectedCity, selectedDay);
     }
 }
@@ -70,7 +69,6 @@ function populateDaysSelect() {
 
         let dayName = weekdays[date.getDay()];
 
-        // Cambia "Oggi" per il primo giorno e "Domani" per il secondo
         if (i === 0) {
             dayName = 'Oggi';
         } else if (i === 1) {
@@ -83,17 +81,15 @@ function populateDaysSelect() {
         const label = `${dayName} (${dayNumber}/${month})`;
 
         const option = document.createElement('option');
-        option.value = i; // 0 = oggi, 1 = domani, ecc.
+        option.value = i; // 0 = Today, 1 = Tomorrow, etc.
         option.textContent = label;
 
         daysSelect.appendChild(option);
     }
 
-    // Imposta "oggi" (valore 0) come selezionato di default
     daysSelect.value = '0';
 }
 
-// Chiamata iniziale
 populateDaysSelect();
 
 showWeatherButton.addEventListener('click', () => {
